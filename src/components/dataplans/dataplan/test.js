@@ -61,5 +61,8 @@ describe('Dataplan', () => {
       const priceComponent = cells.at(3).find(Price);
       expect(priceComponent.prop('value')).toEqual({ price: plan.pricepergigabyte, priceCurrency: 'UGX' });
     });
+    it('should show the maxSpeed in the fourth column', () => {
+      expect(cells.at(4).text()).toEqual(`${plan.maxSpeed}Mbps`);
+    });
   });
 });

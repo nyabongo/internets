@@ -10,6 +10,7 @@ const Dataplan = ({
     dataUnit,
     price,
     pricepergigabyte,
+    maxSpeed,
   },
 }) => (
   <TableRow>
@@ -17,7 +18,7 @@ const Dataplan = ({
     <TableCell>{`${dataVolume}${dataUnit}`}</TableCell>
     <TableCell><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
-    <TableCell>Dataplan</TableCell>
+    <TableCell>{`${maxSpeed}Mbps`}</TableCell>
     <TableCell>Dataplan</TableCell>
     <TableCell>Dataplan</TableCell>
   </TableRow>
