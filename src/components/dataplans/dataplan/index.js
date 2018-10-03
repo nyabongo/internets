@@ -9,13 +9,14 @@ const Dataplan = ({
     isp, dataVolume,
     dataUnit,
     price,
+    pricepergigabyte,
   },
 }) => (
   <TableRow>
     <TableCell>{isp}</TableCell>
     <TableCell>{`${dataVolume}${dataUnit}`}</TableCell>
     <TableCell><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
-    <TableCell>Dataplan</TableCell>
+    <TableCell><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell>Dataplan</TableCell>
     <TableCell>Dataplan</TableCell>
     <TableCell>Dataplan</TableCell>

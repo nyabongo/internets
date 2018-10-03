@@ -53,9 +53,13 @@ describe('Dataplan', () => {
     it('should show the data volume in the second column', () => {
       expect(cells.at(1).text()).toEqual(`${plan.dataVolume}${plan.dataUnit}`);
     });
-    it('should render the price component in the seccond component with price and default currency as UGX', () => {
+    it('should render the price component in the second component with price and default currency as UGX', () => {
       const priceComponent = cells.at(2).find(Price);
       expect(priceComponent.prop('value')).toEqual({ price: plan.price, priceCurrency: 'UGX' });
+    });
+    it('should render the price component in the third component with pricepergigabyte and default currency as UGX', () => {
+      const priceComponent = cells.at(3).find(Price);
+      expect(priceComponent.prop('value')).toEqual({ price: plan.pricepergigabyte, priceCurrency: 'UGX' });
     });
   });
 });
