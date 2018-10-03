@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import Dataplan from '.';
 
 jest.mock('@material-ui/core/TableRow', () => p => p.children);
-jest.mock('@material-ui/core/TableCell', () => p => p.children);
+jest.mock('@material-ui/core/TableCell', () => p => <div>{p.children}</div>);
 
 const plan = {
   id: 2,
@@ -45,6 +45,12 @@ describe('Dataplan', () => {
   describe('row', () => {
     it('should have 7 columns', () => {
       expect(cells).toHaveLength(7);
+    });
+    it('should show the isp name in the first row', () => {
+      expect(cells.at(0).text()).toEqual(plan.isp);
+    });
+    it('should show the data volume in the second column', () => {
+      expect(cells.at(1).text()).toEqual(`${plan.dataVolume}${plan.dataUnit}`);
     });
   });
 });
