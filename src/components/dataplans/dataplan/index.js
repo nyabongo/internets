@@ -2,17 +2,19 @@ import React from 'react';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import PropTypes from 'prop-types';
+import Price from './price';
 
 const Dataplan = ({
   plan: {
     isp, dataVolume,
     dataUnit,
+    price,
   },
 }) => (
   <TableRow>
     <TableCell>{isp}</TableCell>
     <TableCell>{`${dataVolume}${dataUnit}`}</TableCell>
-    <TableCell>Dataplan</TableCell>
+    <TableCell><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell>Dataplan</TableCell>
     <TableCell>Dataplan</TableCell>
     <TableCell>Dataplan</TableCell>

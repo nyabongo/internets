@@ -2,6 +2,7 @@ import React from 'react';
 import mount from 'enzyme/mount';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import Price from './price';
 
 import Dataplan from '.';
 
@@ -51,6 +52,10 @@ describe('Dataplan', () => {
     });
     it('should show the data volume in the second column', () => {
       expect(cells.at(1).text()).toEqual(`${plan.dataVolume}${plan.dataUnit}`);
+    });
+    it('should render the price component in the seccond component with price and default currency as UGX', () => {
+      const priceComponent = cells.at(2).find(Price);
+      expect(priceComponent.prop('value')).toEqual({ price: plan.price, priceCurrency: 'UGX' });
     });
   });
 });
