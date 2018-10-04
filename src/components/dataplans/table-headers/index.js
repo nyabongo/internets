@@ -13,11 +13,11 @@ export const columns = [
   { gridArea: 'tech', label: 'Tech      ' },
 ];
 const TableHeaders = () => (
-  <TableHead>
-    <TableRow>
+  <TableHead component="div">
+    <TableRow component="div">
       {
       columns.map(({ label, gridArea }) => (
-        <TableCell className={`table-header-button ${gridArea}`} key={label}>
+        <TableCell component="div" className={`table-header-button ${gridArea}`} key={label}>
           {label}
         </TableCell>
       ))

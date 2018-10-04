@@ -15,14 +15,14 @@ const Dataplan = ({
     technology,
   },
 }) => (
-  <TableRow hover>
-    <TableCell>{isp}</TableCell>
-    <TableCell>{`${dataVolume}${dataUnit}`}</TableCell>
-    <TableCell><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
-    <TableCell><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
-    <TableCell>{`${maxSpeed}Mbps`}</TableCell>
-    <TableCell>{`${serviceDuration} ${durationUnit}`}</TableCell>
-    <TableCell>{technology}</TableCell>
+  <TableRow component="div" hover>
+    <TableCell component="div">{isp}</TableCell>
+    <TableCell component="div">{`${dataVolume}${dataUnit}`}</TableCell>
+    <TableCell component="div"><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
+    <TableCell component="div"><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
+    <TableCell component="div">{`${maxSpeed}Mbps`}</TableCell>
+    <TableCell component="div">{`${serviceDuration} ${durationUnit}`}</TableCell>
+    <TableCell component="div">{technology}</TableCell>
   </TableRow>
 );
 Dataplan.propTypes = {

@@ -7,9 +7,9 @@ import Plan from './dataplan';
 import TableHeaders from './table-headers';
 
 const DataPlans = ({ dataplans }) => (
-  <Table>
+  <Table component="div">
     <TableHeaders />
-    <TableBody>
+    <TableBody component="div">
       {
         dataplans.map((plan, i) => {
           const key = `${plan.id}-${plan.isp}-${i}`;
