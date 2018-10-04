@@ -11,6 +11,8 @@ const Dataplan = ({
     price,
     pricepergigabyte,
     maxSpeed,
+    serviceDuration, durationUnit,
+    technology,
   },
 }) => (
   <TableRow>
@@ -19,8 +21,8 @@ const Dataplan = ({
     <TableCell><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell>{`${maxSpeed}Mbps`}</TableCell>
-    <TableCell>Dataplan</TableCell>
-    <TableCell>Dataplan</TableCell>
+    <TableCell>{`${serviceDuration} ${durationUnit}`}</TableCell>
+    <TableCell>{technology}</TableCell>
   </TableRow>
 );
 Dataplan.propTypes = {

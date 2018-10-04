@@ -53,16 +53,22 @@ describe('Dataplan', () => {
     it('should show the data volume in the second column', () => {
       expect(cells.at(1).text()).toEqual(`${plan.dataVolume}${plan.dataUnit}`);
     });
-    it('should render the price component in the second component with price and default currency as UGX', () => {
+    it('should render the price component in the third column with price and default currency as UGX', () => {
       const priceComponent = cells.at(2).find(Price);
       expect(priceComponent.prop('value')).toEqual({ price: plan.price, priceCurrency: 'UGX' });
     });
-    it('should render the price component in the third component with pricepergigabyte and default currency as UGX', () => {
+    it('should render the price component in the fourth column with pricepergigabyte and default currency as UGX', () => {
       const priceComponent = cells.at(3).find(Price);
       expect(priceComponent.prop('value')).toEqual({ price: plan.pricepergigabyte, priceCurrency: 'UGX' });
     });
-    it('should show the maxSpeed in the fourth column', () => {
+    it('should show the maxSpeed in the fifth column', () => {
       expect(cells.at(4).text()).toEqual(`${plan.maxSpeed}Mbps`);
+    });
+    it('should show the duration in the sixth column', () => {
+      expect(cells.at(5).text()).toEqual(`${plan.serviceDuration} ${plan.durationUnit}`);
+    });
+    it('should show the isp tech in the seventh row', () => {
+      expect(cells.at(6).text()).toEqual(plan.technology);
     });
   });
 });
