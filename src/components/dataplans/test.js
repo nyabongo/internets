@@ -9,7 +9,7 @@ import TableHeaders from './table-headers';
 
 jest.mock('./container',
   () => C => p => <C {...p} dataplans={mockDataplans} />);
-jest.mock('./dataplan', () => () => <tr />);
+jest.mock('./dataplan', () => () => <div />);
 
 describe('Dataplans', () => {
   let wrapper;

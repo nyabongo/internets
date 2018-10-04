@@ -6,8 +6,6 @@ import Price from './price';
 
 import Dataplan from '.';
 
-jest.mock('@material-ui/core/TableRow', () => p => p.children);
-jest.mock('@material-ui/core/TableCell', () => p => <div>{p.children}</div>);
 
 const plan = {
   id: 2,

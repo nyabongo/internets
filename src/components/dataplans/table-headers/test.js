@@ -3,10 +3,6 @@ import mount from 'enzyme/mount';
 import TableCell from '@material-ui/core/TableCell';
 import TableHeaders, { columns } from '.';
 
-jest.mock('@material-ui/core/TableCell', () => p => <div>{p.children}</div>);
-jest.mock('@material-ui/core/TableRow', () => p => p.children);
-jest.mock('@material-ui/core/TableHead', () => p => p.children);
-
 describe('TableHeaders', () => {
   let wrapper;
   beforeEach(() => {
