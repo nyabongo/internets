@@ -1,12 +1,12 @@
 import React from 'react';
-import shallow from 'enzyme/shallow';
+import mount from 'enzyme/mount';
 import DataPlans from './components/dataplans';
 import App from './App';
 
 describe('App', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<App />);
+    wrapper = mount(<App />);
   });
   it('should render without crashing', () => {
     expect(wrapper.exists()).toBeTruthy();
