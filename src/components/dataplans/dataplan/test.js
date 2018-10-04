@@ -65,6 +65,11 @@ describe('Dataplan', () => {
     it('should show the duration in the sixth column', () => {
       expect(cells.at(5).text()).toEqual(`${plan.serviceDuration} ${plan.durationUnit}`);
     });
+    it('should pluralize the duration where appropriate', () => {
+      wrapper.setProps({ plan: { ...plan, serviceDuration: 3 } });
+      cells = wrapper.find(TableCell);
+      expect(cells.at(5).text()).toEqual(`${wrapper.prop('plan').serviceDuration} ${plan.durationUnit}s`);
+    });
     it('should show the isp tech in the seventh row', () => {
       expect(cells.at(6).text()).toEqual(plan.technology);
     });

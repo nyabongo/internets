@@ -21,7 +21,7 @@ const Dataplan = ({
     <TableCell component="div"><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell component="div"><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
     <TableCell component="div">{`${maxSpeed}Mbps`}</TableCell>
-    <TableCell component="div">{`${serviceDuration} ${durationUnit}`}</TableCell>
+    <TableCell component="div">{`${serviceDuration} ${durationUnit}${serviceDuration > 1 ? 's' : ''}`}</TableCell>
     <TableCell component="div">{technology}</TableCell>
   </TableRow>
 );
