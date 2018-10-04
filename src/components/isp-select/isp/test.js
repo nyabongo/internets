@@ -12,4 +12,7 @@ describe('ISP', () => {
   it('should render', () => {
     expect(wrapper.exists()).toBeTruthy();
   });
+  it('should contain the ispname in its text', () => {
+    expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.prop('isp')));
+  });
 });
