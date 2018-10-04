@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import Paper from '@material-ui/core/Paper';
 import container from './container';
 import Plan from './dataplan';
 import TableHeaders from './table-headers';
 
 const DataPlans = ({ dataplans }) => (
-  <Table component="div">
+  <Table component={Paper}>
     <TableHeaders />
     <TableBody component="div">
       {
