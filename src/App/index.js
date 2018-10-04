@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import withDataplans from './with-dataplans';
 import Dataplans from '../components/dataplans';
+import ISPs from '../components/isp-select';
 
 const drawerWidth = 240;
 
@@ -67,7 +68,7 @@ class App extends React.Component {
       <div>
         <div className={classes.toolbar} />
         <Divider />
-        sidebar stuff here
+        <ISPs dataplans={dataplans} />
       </div>
     );
     const { mobileOpen } = this.state;

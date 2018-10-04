@@ -1,6 +1,7 @@
 import React from 'react';
 import mount from 'enzyme/mount';
 import DataPlans from '../components/dataplans';
+import ISPSelect from '../components/isp-select';
 import mockDataplans from './with-dataplans/example-dataplans';
 import App from '.';
 
@@ -17,10 +18,16 @@ describe('App', () => {
   it('should contain the DataPlans component', () => {
     expect(wrapper.find(DataPlans).exists()).toBeTruthy();
   });
+  it('should pass the dataplans to the Dataplans component', () => {
+    expect(wrapper.find(DataPlans).prop('dataplans')).toBe(mockDataplans);
+  });
   it('should contain dataplans from mockDataplans', () => {
     expect(wrapper.childAt(0).prop('dataplans')).toBe(mockDataplans);
   });
-  it('should pass the dataplans to the Dataplans component', () => {
-    expect(wrapper.find(DataPlans).prop('dataplans')).toBe(mockDataplans);
+  it('should render the ISP component', () => {
+    expect(wrapper.find(ISPSelect).exists()).toBeTruthy();
+  });
+  it('should pass the dataplans to the ISP component', () => {
+    expect(wrapper.find(ISPSelect).prop('dataplans')).toBe(mockDataplans);
   });
 });
