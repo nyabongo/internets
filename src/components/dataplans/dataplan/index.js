@@ -15,7 +15,7 @@ const Dataplan = ({
     technology,
   },
 }) => (
-  <TableRow>
+  <TableRow hover>
     <TableCell>{isp}</TableCell>
     <TableCell>{`${dataVolume}${dataUnit}`}</TableCell>
     <TableCell><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
