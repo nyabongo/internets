@@ -84,7 +84,7 @@ class App extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-            Responsive drawer
+            Dataplans
             </Typography>
           </Toolbar>
         </AppBar>
@@ -94,12 +94,8 @@ class App extends React.Component {
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={this.handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
+            classes={{ paper: classes.drawerPaper }}
+            ModalProps={{ keepMounted: true }}
           >
             {drawer}
           </Drawer>
@@ -108,9 +104,7 @@ class App extends React.Component {
           <Drawer
             variant="permanent"
             open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
+            classes={{ paper: classes.drawerPaper }}
           >
             {drawer}
           </Drawer>
