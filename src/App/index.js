@@ -10,7 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import Dataplans from './components/dataplans';
+import withDataplans from './with-dataplans';
+import Dataplans from '../components/dataplans';
 
 const drawerWidth = 240;
 
@@ -60,7 +61,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, dataplans } = this.props;
 
     const drawer = (
       <div>
@@ -116,7 +117,7 @@ class App extends React.Component {
         </Hidden>
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <Dataplans />
+          <Dataplans dataplans={dataplans} />
         </div>
       </div>
     );
@@ -126,6 +127,10 @@ class App extends React.Component {
 App.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   theme: PropTypes.shape({}).isRequired,
+  dataplans: PropTypes.arrayOf(PropTypes.object),
+};
+App.defaultProps = {
+  dataplans: [],
 };
 
-export default withStyles(styles, { withTheme: true })(App);
+export default withDataplans(withStyles(styles, { withTheme: true })(App));
