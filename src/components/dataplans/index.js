@@ -5,6 +5,7 @@ import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import Plan from './dataplan';
 import TableHeaders from './table-headers';
+import container from './container';
 
 const DataPlans = ({ dataplans }) => (
   <Table component={Paper}>
@@ -25,4 +26,4 @@ DataPlans.propTypes = {
 DataPlans.defaultProps = {
   dataplans: [],
 };
-export default DataPlans;
+export default container(DataPlans);
