@@ -10,9 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import compose from 'recompose/compose';
 import withDataplans from './with-dataplans';
 import Dataplans from '../components/dataplans';
 import ISPs from '../components/isp-select';
+import withFilter from './with-filter';
 
 const drawerWidth = 240;
 
@@ -62,18 +64,20 @@ class App extends React.Component {
   };
 
   render() {
-    const { classes, theme, dataplans } = this.props;
+    const {
+      classes, theme, dataplans, updateFilters, filters,
+    } = this.props;
 
     const drawer = (
       <div>
         <div className={classes.toolbar} />
         <Divider />
-        <ISPs dataplans={dataplans} />
+        <ISPs dataplans={dataplans} filters={filters} updateFilters={updateFilters} />
       </div>
     );
     const { mobileOpen } = this.state;
     return (
-      <div className={classes.root}>
+      <div id="App" className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton
@@ -122,10 +126,16 @@ class App extends React.Component {
 App.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   theme: PropTypes.shape({}).isRequired,
+  filters: PropTypes.shape({}).isRequired,
   dataplans: PropTypes.arrayOf(PropTypes.object),
+  updateFilters: PropTypes.func.isRequired,
 };
 App.defaultProps = {
   dataplans: [],
 };
 
-export default withDataplans(withStyles(styles, { withTheme: true })(App));
+export default compose(
+  withDataplans,
+  withFilter,
+  withStyles(styles, { withTheme: true }),
+)(App);
