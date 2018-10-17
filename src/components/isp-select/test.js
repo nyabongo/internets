@@ -27,6 +27,19 @@ describe('ISPSelect', () => {
       expect(renderedISPS.findWhere(n => n.prop('isp') === isp)).toHaveLength(1);
     });
   });
+  it('should render selected ISPs with their selected prop set to true', () => {
+    expect.hasAssertions();
+    const selectedIsps = ['Africell Uganda', 'Smile Communications Uganda'];
+    wrapper.setState({ selected: selectedIsps });
+    wrapper.update();
+    renderedISPS = wrapper.find(ISP);
+    Object.keys(isps).forEach((isp) => {
+      if (selectedIsps.includes(isp)) {
+        const renderedIsp = renderedISPS.findWhere(n => n.prop('isp') === isp);
+        expect(renderedIsp.prop('selected')).toBe(true);
+      }
+    });
+  });
   describe('onSelect', () => {
     it('should pass each ISP an onSelect function', () => {
       expect.hasAssertions();

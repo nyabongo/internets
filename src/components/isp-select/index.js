@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import groupBy from 'lodash/groupBy';
 import ISP from './isp';
 
-const ISPs = ({ dataplans, onSelect }) => {
+const ISPs = ({ dataplans, onSelect, selected }) => {
   const groupedByIsps = groupBy(dataplans, 'isp');
 
   return (
@@ -14,6 +14,7 @@ const ISPs = ({ dataplans, onSelect }) => {
           const key = isp;
           return (
             <ISP
+              selected={selected.includes(isp)}
               key={key}
               isp={isp}
               onSelect={() => onSelect(isp)}
@@ -29,6 +30,7 @@ ISPs.propTypes = {
   dataplans: PropTypes.arrayOf(PropTypes.shape({
     isp: PropTypes.string,
   })),
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 ISPs.defaultProps = {
