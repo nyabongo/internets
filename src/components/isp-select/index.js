@@ -4,37 +4,30 @@ import PropTypes from 'prop-types';
 import groupBy from 'lodash/groupBy';
 import ISP from './isp';
 
-const ISPs = ({ dataplans, onSelect, selected }) => {
-  const groupedByIsps = groupBy(dataplans, 'isp');
-
-  return (
-    <Fragment>
-      {
-        Object.keys(groupedByIsps).map((isp) => {
-          const key = isp;
-          return (
-            <ISP
-              selected={selected.includes(isp)}
-              key={key}
-              isp={isp}
-              onSelect={() => onSelect(isp)}
-            />
-          );
-        })
+const ISPs = ({
+  onSelect, selected, isps,
+}) => (
+  <Fragment>
+    {
+      Object.keys(isps).map((isp) => {
+        const key = isp;
+        return (
+          <ISP
+            selected={selected.includes(isp)}
+            key={key}
+            isp={isp}
+            onSelect={() => onSelect(isp)}
+          />
+        );
+      })
       }
-    </Fragment>
-  );
-};
+  </Fragment>
+);
 
 ISPs.propTypes = {
-  dataplans: PropTypes.arrayOf(PropTypes.shape({
-    isp: PropTypes.string,
-  })),
+  isps: PropTypes.shape({}).isRequired,
   selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   onSelect: PropTypes.func.isRequired,
-};
-ISPs.defaultProps = {
-  dataplans: [],
 };
 
 const getPredicate = allowed => (val) => {
@@ -43,7 +36,8 @@ const getPredicate = allowed => (val) => {
 };
 
 export default withStateHandlers(
-  { selected: [] }, {
+  ({ dataplans }) => ({ selected: [], isps: groupBy(dataplans, 'isp') }),
+  {
     onSelect: ({ selected }, { updateFilters }) => (isp) => {
       const update = new Set(selected);
       if (update.has(isp)) {
