@@ -9,7 +9,7 @@ const ISPs = ({
 }) => (
   <Fragment>
     {
-      Object.keys(isps).map((isp) => {
+      Object.keys(isps).sort().map((isp) => {
         const key = isp;
         return (
           <ISP
@@ -20,7 +20,7 @@ const ISPs = ({
           />
         );
       })
-      }
+    }
   </Fragment>
 );
 
