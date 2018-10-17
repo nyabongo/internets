@@ -75,7 +75,7 @@ describe('ISPSelect', () => {
         const renderedIsp = renderedISPS.findWhere(n => n.prop('isp') === isp);
         renderedIsp.prop('onSelect')(isp);
         wrapper.update();
-        expect(wrapper.prop('updateFilters')).toHaveBeenCalledWith(isp, expect.any(Function));
+        expect(wrapper.prop('updateFilters')).toHaveBeenCalledWith('isp_filter', expect.any(Function));
       });
     });
     it('should call updateFilters with the isp and a function that returns true when given a selected isp', () => {

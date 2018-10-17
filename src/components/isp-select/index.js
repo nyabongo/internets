@@ -46,7 +46,7 @@ export default withStateHandlers(
         update.add(isp);
       }
 
-      updateFilters(isp, getPredicate(update));
+      updateFilters('isp_filter', getPredicate(update));
       return { selected: [...update] };
     },
   },
