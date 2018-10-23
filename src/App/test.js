@@ -11,6 +11,9 @@ const mockFilters = {};
 const mockSetCurrency = jest.fn();
 const mockCurrency = 'KLX';
 
+jest.mock('../components/currency-select', () => () => <div />);
+jest.mock('../components/dataplans', () => () => <div />);
+
 jest.mock('./with-fx',
   () => C => p => <C {...p} setCurrency={mockSetCurrency} currency={mockCurrency} />);
 jest.mock('./with-dataplans',
