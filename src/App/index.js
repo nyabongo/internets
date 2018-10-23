@@ -76,7 +76,12 @@ class App extends React.Component {
         <div className={classes.toolbar} />
         <Divider />
         <CurrencySelect onChange={setCurrency} value={currency} />
-        <ISPs dataplans={dataplans} filters={filters} updateFilters={updateFilters} />
+        <ISPs
+          key={currency}
+          dataplans={dataplans}
+          filters={filters}
+          updateFilters={updateFilters}
+        />
       </div>
     );
     const { mobileOpen } = this.state;
@@ -141,8 +146,8 @@ App.defaultProps = {
 };
 
 export default compose(
-  withDataplans,
-  withFx,
-  withFilter,
   withStyles(styles, { withTheme: true }),
+  withDataplans,
+  withFilter,
+  withFx,
 )(App);
