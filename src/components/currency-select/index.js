@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import currencies from './currencies';
+
+const codes = Object.keys(currencies);
 
 const CurrencySelect = ({ value, onChange }) => (
-  <div>
-      Currency Select
-    {' '}
-    {JSON.stringify({ value, onChange })}
-  </div>
+  <Select
+    value={value}
+    onChange={({ target: { value: val } }) => onChange(val)}
+  >
+    {
+       codes.map(code => (
+         <MenuItem key={code} value={code}>
+           {currencies[code].name_plural}
+         </MenuItem>
+       ))
+     }
+  </Select>
 );
 
 CurrencySelect.propTypes = {
