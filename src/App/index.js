@@ -14,7 +14,9 @@ import compose from 'recompose/compose';
 import withDataplans from './with-dataplans';
 import Dataplans from '../components/dataplans';
 import ISPs from '../components/isp-select';
+import CurrencySelect from '../components/currency-select';
 import withFilter from './with-filter';
+import withFx from './with-fx';
 
 const drawerWidth = 240;
 
@@ -66,12 +68,14 @@ class App extends React.Component {
   render() {
     const {
       classes, theme, dataplans, updateFilters, filters,
+      currency, setCurrency,
     } = this.props;
 
     const drawer = (
       <div>
         <div className={classes.toolbar} />
         <Divider />
+        <CurrencySelect onChange={setCurrency} value={currency} />
         <ISPs dataplans={dataplans} filters={filters} updateFilters={updateFilters} />
       </div>
     );
@@ -129,6 +133,8 @@ App.propTypes = {
   filters: PropTypes.shape({}).isRequired,
   dataplans: PropTypes.arrayOf(PropTypes.object),
   updateFilters: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
+  setCurrency: PropTypes.func.isRequired,
 };
 App.defaultProps = {
   dataplans: [],
@@ -136,6 +142,7 @@ App.defaultProps = {
 
 export default compose(
   withDataplans,
+  withFx,
   withFilter,
   withStyles(styles, { withTheme: true }),
 )(App);
