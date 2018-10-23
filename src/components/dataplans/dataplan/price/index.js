@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import currencies from './currencies';
+import currencies from '../../../currency-select/currencies';
 
 const Price = ({ value: { price, priceCurrency: currency } }) => {
   const p = parseFloat(price).toFixed(currencies[currency].decimal_digits);
