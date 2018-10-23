@@ -6,6 +6,7 @@ import Price from './price';
 
 import Dataplan from '.';
 
+jest.mock('./price', () => () => <div />);
 
 const plan = {
   id: 2,
@@ -17,8 +18,8 @@ const plan = {
   dataVolume: 100,
   dataUnit: 'MB',
   megaBytes: 100,
-  price: 2000,
-  pricepergigabyte: 20480,
+  price: { price: 2000, priceCurrency: 'USD' },
+  pricepergigabyte: { price: 20480, priceCurrency: 'USD' },
   centsperMB: 2048000,
   maxSpeed: 100,
   maxKbps: 102400,
@@ -51,13 +52,13 @@ describe('Dataplan', () => {
     it('should show the data volume in the second column', () => {
       expect(cells.at(1).text()).toEqual(`${plan.dataVolume}${plan.dataUnit}`);
     });
-    it('should render the price component in the third column with price and default currency as UGX', () => {
+    it('should render the price component in the third column with price', () => {
       const priceComponent = cells.at(2).find(Price);
-      expect(priceComponent.prop('value')).toEqual({ price: plan.price, priceCurrency: 'UGX' });
+      expect(priceComponent.prop('value')).toEqual(plan.price);
     });
-    it('should render the price component in the fourth column with pricepergigabyte and default currency as UGX', () => {
+    it('should render the price component in the fourth column with pricepergigabyte', () => {
       const priceComponent = cells.at(3).find(Price);
-      expect(priceComponent.prop('value')).toEqual({ price: plan.pricepergigabyte, priceCurrency: 'UGX' });
+      expect(priceComponent.prop('value')).toEqual(plan.pricepergigabyte);
     });
     it('should show the maxSpeed in the fifth column', () => {
       expect(cells.at(4).text()).toEqual(`${plan.maxSpeed}Mbps`);

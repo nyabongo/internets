@@ -18,8 +18,8 @@ const Dataplan = ({
   <TableRow component="div" hover>
     <TableCell component="div">{isp}</TableCell>
     <TableCell component="div">{`${dataVolume}${dataUnit}`}</TableCell>
-    <TableCell component="div"><Price value={{ price, priceCurrency: 'UGX' }} /></TableCell>
-    <TableCell component="div"><Price value={{ price: pricepergigabyte, priceCurrency: 'UGX' }} /></TableCell>
+    <TableCell component="div"><Price value={price} /></TableCell>
+    <TableCell component="div"><Price value={pricepergigabyte} /></TableCell>
     <TableCell component="div">{`${maxSpeed}Mbps`}</TableCell>
     <TableCell component="div">{`${serviceDuration} ${durationUnit}${serviceDuration > 1 ? 's' : ''}`}</TableCell>
     <TableCell component="div">{technology}</TableCell>
