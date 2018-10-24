@@ -77,7 +77,6 @@ class App extends React.Component {
         <Divider />
         <CurrencySelect onChange={setCurrency} value={currency} />
         <ISPs
-          key={currency}
           dataplans={dataplans}
           filters={filters}
           updateFilters={updateFilters}
