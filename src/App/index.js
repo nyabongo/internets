@@ -148,6 +148,6 @@ App.defaultProps = {
 export default compose(
   withStyles(styles, { withTheme: true }),
   withDataplans,
-  withFilter,
   withFx,
+  withFilter,
 )(App);

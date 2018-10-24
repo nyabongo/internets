@@ -24,7 +24,7 @@ describe('withFilter', () => {
     expect(tc.prop('updateFilters')).toBeInstanceOf(Function);
   });
   it('should pass the dataplans to the contained component', () => {
-    expect(tc.prop('dataplans')).toBe(wrapper.prop('dataplans'));
+    expect(tc.prop('dataplans')).toEqual(wrapper.prop('dataplans'));
   });
   describe('updateFilter', () => {
     let updateFilter;
@@ -38,8 +38,8 @@ describe('withFilter', () => {
       wrapper.update();
       expect(wrapper.state('filters')).toMatchObject({ [label]: predicate });
     });
-    it('should initialise the dataplans state to be the dataplans prop', () => {
-      expect(wrapper.state('dataplans')).toBe(wrapper.prop('dataplans'));
+    it('should initialise the dataplans prop to be the dataplans prop', () => {
+      expect(tc.prop('dataplans')).toEqual(wrapper.prop('dataplans'));
     });
     it('should update the dataplans state by using all the filter predicates that have been set when the filter is updated', () => {
       const africellFIlter = ['africell', p => p.isp === 'Africell'];
@@ -47,9 +47,10 @@ describe('withFilter', () => {
       updateFilter(...africellFIlter);
       updateFilter(...unspecifiedTechFilter);
       wrapper.update();
+      tc = wrapper.find(TestComp);
       const filteredByAfricellFilter = filter(wrapper.props('dataplans'), africellFIlter[1]);
       const filteredByBoth = filter(filteredByAfricellFilter, unspecifiedTechFilter[1]);
-      expect(wrapper.state('dataplans')).toEqual(filteredByBoth);
+      expect(tc.prop('dataplans')).toEqual(filteredByBoth);
     });
   });
 });

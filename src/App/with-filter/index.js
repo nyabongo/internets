@@ -1,21 +1,26 @@
+import React from 'react';
 import compose from 'recompose/compose';
 import withStateHandlers from 'recompose/withStateHandlers';
 import filter from 'lodash/filter';
 
+const runFilters = C => ({ dataplans, filters, ...props }) => {
+  let filtered = [...dataplans];
+  Object.keys(filters).forEach((key) => {
+    filtered = filter(filtered, filters[key]);
+  });
+  return <C {...props} filters={filters} dataplans={filtered} />;
+};
+
 export default compose(
   withStateHandlers(
-    ({ dataplans }) => ({ filters: {}, dataplans }),
+    () => ({ filters: {} }),
     {
-      updateFilters: ({ filters }, { dataplans }) => (label, predicate) => {
+      updateFilters: ({ filters }) => (label, predicate) => {
         const update = { [label]: predicate };
         const newFilters = { ...filters, ...update };
-        let filtered = [...dataplans];
-        Object.keys(newFilters).forEach((key) => {
-          filtered = filter(filtered, newFilters[key]);
-        });
-
-        return { filters: newFilters, dataplans: filtered };
+        return { filters: newFilters };
       },
     },
   ),
+  runFilters,
 );
