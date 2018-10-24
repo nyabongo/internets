@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import currencies from '../../../currency-select/currencies';
 
@@ -7,9 +7,9 @@ const Price = ({ value: { price, priceCurrency: currency } }) => {
   const { symbol } = currencies[currency];
 
   return (
-    <Fragment>
+    <div style={{ whiteSpace: 'nowrap' }}>
       {`${symbol}${Number(p).toLocaleString()}`}
-    </Fragment>
+    </div>
   );
 };
 
