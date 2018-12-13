@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -67,8 +66,12 @@ class App extends React.Component {
 
   render() {
     const {
-      classes, theme, dataplans, updateFilters, filters,
-      currency, setCurrency,
+      classes,
+      dataplans,
+      updateFilters,
+      filters,
+      currency,
+      setCurrency,
     } = this.props;
 
     const drawer = (
@@ -97,14 +100,14 @@ class App extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-            Dataplans
+              Dataplans
             </Typography>
           </Toolbar>
         </AppBar>
         <Hidden mdUp>
           <Drawer
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            anchor="left"
             open={mobileOpen}
             onClose={this.handleDrawerToggle}
             classes={{ paper: classes.drawerPaper }}

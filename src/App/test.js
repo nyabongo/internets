@@ -1,5 +1,6 @@
 import React from 'react';
 import mount from 'enzyme/mount';
+import { IconButton } from '@material-ui/core';
 import DataPlans from '../components/dataplans';
 import ISPSelect from '../components/isp-select';
 import CurrencySelect from '../components/currency-select';
@@ -14,32 +15,41 @@ const mockCurrency = 'KLX';
 jest.mock('../components/currency-select', () => () => <div />);
 jest.mock('../components/dataplans', () => () => <div />);
 
-jest.mock('./with-fx',
-  () => C => p => <C {...p} setCurrency={mockSetCurrency} currency={mockCurrency} />);
-jest.mock('./with-dataplans',
-  () => C => p => <C {...p} dataplans={mockDataplans} />);
-jest.mock('./with-filter',
-  () => C => p => <C {...p} updateFilters={mockUpdateFilters} filters={mockFilters} />);
+jest.mock('./with-fx', () => C => p => (
+  <C {...p} setCurrency={mockSetCurrency} currency={mockCurrency} />
+));
+jest.mock('./with-dataplans', () => C => p => (
+  <C {...p} dataplans={mockDataplans} />
+));
+jest.mock('./with-filter', () => C => p => (
+  <C {...p} updateFilters={mockUpdateFilters} filters={mockFilters} />
+));
 describe('App', () => {
   let wrapper;
+  let app;
   let isps;
   let currencySelect;
   beforeEach(() => {
-    wrapper = mount(<App />).find('App');
-    isps = wrapper.find(ISPSelect);
-    currencySelect = wrapper.find(CurrencySelect);
+    wrapper = mount(<App />);
+    app = wrapper.find('App');
+    isps = app.find(ISPSelect);
+    currencySelect = app.find(CurrencySelect);
   });
   it('should render without crashing', () => {
-    expect(wrapper.exists()).toBeTruthy();
+    expect(app.exists()).toBeTruthy();
+  });
+  it('should have a clickable iconbutton', () => {
+    const button = app.find(IconButton);
+    button.simulate('click');
   });
   it('should contain the DataPlans component', () => {
-    expect(wrapper.find(DataPlans).exists()).toBeTruthy();
+    expect(app.find(DataPlans).exists()).toBeTruthy();
   });
   it('should pass the dataplans to the Dataplans component', () => {
-    expect(wrapper.find(DataPlans).prop('dataplans')).toBe(mockDataplans);
+    expect(app.find(DataPlans).prop('dataplans')).toBe(mockDataplans);
   });
   it('should contain dataplans from mockDataplans', () => {
-    expect(wrapper.prop('dataplans')).toBe(mockDataplans);
+    expect(app.prop('dataplans')).toBe(mockDataplans);
   });
   it('should render the ISP component', () => {
     expect(isps.exists()).toBeTruthy();
@@ -54,14 +64,14 @@ describe('App', () => {
     let updateFilters;
     let filters;
     beforeEach(() => {
-      updateFilters = wrapper.prop('updateFilters');
-      filters = wrapper.prop('filters');
+      updateFilters = app.prop('updateFilters');
+      filters = app.prop('filters');
     });
     it('should receive mockUpdateFilters from with-filter as its updateFilter prop', () => {
-      expect(wrapper.prop('updateFilters')).toBe(mockUpdateFilters);
+      expect(app.prop('updateFilters')).toBe(mockUpdateFilters);
     });
     it('should receive mockFilters from with-filter as its filters prop', () => {
-      expect(wrapper.prop('filters')).toBe(mockFilters);
+      expect(app.prop('filters')).toBe(mockFilters);
     });
     it('should pass the updateFilter prop to the ISP component', () => {
       expect(isps.prop('updateFilters')).toBe(updateFilters);
@@ -75,14 +85,14 @@ describe('App', () => {
     let setCurrency;
     let currency;
     beforeEach(() => {
-      setCurrency = wrapper.prop('setCurrency');
-      currency = wrapper.prop('currency');
+      setCurrency = app.prop('setCurrency');
+      currency = app.prop('currency');
     });
     it('should receive mockSetCurrency from with-fx as its setCurrency prop', () => {
-      expect(wrapper.prop('setCurrency')).toBe(mockSetCurrency);
+      expect(app.prop('setCurrency')).toBe(mockSetCurrency);
     });
     it('should receive mockCurrency from with-fx as its currency prop', () => {
-      expect(wrapper.prop('currency')).toBe(mockCurrency);
+      expect(app.prop('currency')).toBe(mockCurrency);
     });
     it('should pass the mockSetCurrency prop to the CurrencySelect component', () => {
       expect(currencySelect.prop('onChange')).toBe(setCurrency);

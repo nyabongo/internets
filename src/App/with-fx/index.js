@@ -14,10 +14,7 @@ function convert(value, currency, rates) {
 function formatPlans(dataplans, currency, fxRates) {
   const plans = [];
   dataplans.forEach((plan) => {
-    const price = (plan.price.price)
-      ? plan.price.price : plan.price;
-    const ppgb = (plan.pricepergigabyte.price)
-      ? plan.pricepergigabyte.price : plan.pricepergigabyte;
+    const { price, pricepergigabyte: ppgb } = plan;
     plans.push({
       ...plan,
       price: {
@@ -34,28 +31,27 @@ function formatPlans(dataplans, currency, fxRates) {
   return plans;
 }
 
-
 export default compose(
-  withStateHandlers(({ dataplans }) => {
-    const currency = 'UGX';
-    const fxRates = null;
-    const plans = formatPlans(dataplans, currency, fxRates);
-    return { dataplans: plans, fxRates, currency };
-  },
-  {
-    setFxRates: ({ currency }, { dataplans }) => (rates) => {
-      const plans = formatPlans(dataplans, currency, rates);
-
-      return { dataplans: plans, fxRates: rates, currency };
+  withStateHandlers(
+    ({ dataplans }) => {
+      const currency = 'UGX';
+      const fxRates = null;
+      const plans = formatPlans(dataplans, currency, fxRates);
+      return { dataplans: plans, fxRates, currency };
     },
-    setCurrency: ({ fxRates }, { dataplans }) => (newCurrency) => {
-      const plans = formatPlans(dataplans, newCurrency, fxRates);
+    {
+      setFxRates: ({ currency }, { dataplans }) => (rates) => {
+        const plans = formatPlans(dataplans, currency, rates);
 
+        return { dataplans: plans, fxRates: rates, currency };
+      },
+      setCurrency: ({ fxRates }, { dataplans }) => (newCurrency) => {
+        const plans = formatPlans(dataplans, newCurrency, fxRates);
 
-      return { dataplans: plans, currency: newCurrency };
+        return { dataplans: plans, currency: newCurrency };
+      },
     },
-
-  }),
+  ),
   lifecycle({
     componentWillMount() {
       fetchForexRates().then((rates) => {
