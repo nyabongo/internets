@@ -16,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:coverage": "react-scripts test --coverage --no-cache",
+    "lint": "tslint -c tslint.json ./**/*.{ts,tsx}"
   },
   "eslintConfig": {
     "extends": "react-app"
