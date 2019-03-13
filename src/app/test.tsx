@@ -1,9 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount, ReactWrapper } from 'enzyme';
 import App from '.';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('App', () => {
+  let wrapper:ReactWrapper;
+  beforeEach(() => {
+    wrapper = mount(<App />);
+  });
+  it('should render without crashing', () => {
+    expect(wrapper.exists()).toBeTruthy();
+  });
 });
