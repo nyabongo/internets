@@ -14,9 +14,6 @@ const App = () => {
     showPage: (pageName: string) => {
       setPage(pageName);
     },
-    clearPage:() => {
-      setPage('');
-    },
   };
   const controller: Presenter = new Controller(view, model);
 

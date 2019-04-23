@@ -61,14 +61,6 @@ describe('App', () => {
         wrapper.update();
         expect(wrapper.find(HomePage).exists()).toBeTruthy();
       });
-      it('should not be rendered when view.clearPage() is called', () => {
-        act(() => { view.showPage('home'); });
-        wrapper.update();
-        expect(wrapper.find(HomePage).exists()).toBeTruthy();
-        act(() => { view.clearPage(); });
-        wrapper.update();
-        expect(wrapper.find(HomePage).exists()).toBeFalsy();
-      });
     });
   });
 });
