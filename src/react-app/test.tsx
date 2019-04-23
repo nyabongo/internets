@@ -10,6 +10,7 @@ import Router from './components/page-router';
 
 jest.mock('../db');
 jest.mock('../App/controller');
+jest.mock('./components/page-router', () => () => null);
 
 describe('App', () => {
   let wrapper: ReactWrapper;
@@ -36,12 +37,16 @@ describe('App', () => {
   });
 
   describe('Router', () => {
-    let router: ReactWrapper;
+    let router: ReactWrapper<{ view: View; }, never, React.Component<{}, {}, any>>;
     beforeEach(() => {
       router = wrapper.find(Router);
     });
     it('should be rendered', () => {
       expect(router.exists()).toBeTruthy();
+    });
+    it('should be rendered with view as its view prop', () => {
+      const view = MockController.mock.calls[0][0];
+      expect(router.prop('view')).toBe(view);
     });
   });
 

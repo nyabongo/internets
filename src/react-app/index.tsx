@@ -6,6 +6,7 @@ import Model from '../App/interfaces/model';
 import Presenter from '../App/interfaces/presenter';
 import HomePage from './components/home-page';
 import PageRouter from './components/page-router';
+import { BrowserRouter } from 'react-router-dom';
 
 const App = () => {
   const [page, setPage] = useState('');
@@ -18,10 +19,12 @@ const App = () => {
   const controller: Presenter = new Controller(view, model);
 
   return (
-    <Fragment>
-      <PageRouter />
-      {page === 'home' && <HomePage />}
-    </Fragment>
+    <BrowserRouter>
+      <Fragment>
+        <PageRouter view={view} />
+        {page === 'home' && <HomePage />}
+      </Fragment>
+    </BrowserRouter>
   );
 
 };
