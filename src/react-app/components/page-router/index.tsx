@@ -1,10 +1,16 @@
 import React from 'react';
+import View from '../../../App/interfaces/view';
+import { Switch, Route } from 'react-router-dom';
 
-const PageRouter = () => {
+type Prop = {
+  view: View,
+};
+
+const PageRouter = ({ view }: Prop) => {
   return (
-    <div>
-      page Router
-    </div>
+    <Switch>
+      <Route render={() => { view.showPage('home'); return null; }} />
+    </Switch>
   );
 };
 
