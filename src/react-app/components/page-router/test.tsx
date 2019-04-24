@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import PageRouter from '.';
-import View from '../../../App/interfaces/view';
+import { View } from '../..';
 
 describe('PageRouter', () => {
   let wrapper: ReactWrapper;
