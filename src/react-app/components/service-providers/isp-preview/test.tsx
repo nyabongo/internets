@@ -3,14 +3,8 @@ import { mount, ReactWrapper } from 'enzyme';
 import { Link, LinkProps } from 'react-router-dom';
 import ISPPreview from '.';
 
-jest.mock('react-router-dom/Link', () => ({
-  // eslint-disable-next-line react/prop-types
-  Link: ({ children }: LinkProps) => (
-    <div>
-      {children}
-    </div>
-  ),
-}));
+jest.mock('react-router-dom', () => ({ Link: () => null }));
+
 describe('ISPPreview', () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
@@ -28,7 +22,7 @@ describe('ISPPreview', () => {
       expect(link.exists()).toBeTruthy();
     });
     it('should have the text "More ISPs" ', () => {
-      expect(link.text()).toBe('More ISPs');
+      expect(link.prop('children')).toBe('More ISPs');
     });
     it('should link to providers', () => {
       expect(link.prop('to')).toBe('/providers');
