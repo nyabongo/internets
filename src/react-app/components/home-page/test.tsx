@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import ISPPreview from './isp-preview';
+import ISPPreview from '../isps/isp-preview';
 import HomePage from '.';
 
-jest.mock('./isp-preview', () => () => null);
+jest.mock('../isps/isp-preview', () => () => null);
 
 describe('HomePage', () => {
   let wrapper: ReactWrapper;

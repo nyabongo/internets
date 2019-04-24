@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import ISPPreview from './isp-preview';
+import ISPPreview from '../isps/isp-preview';
 
 const HomePage = () => (
   <Fragment>
