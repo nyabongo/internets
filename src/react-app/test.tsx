@@ -6,7 +6,6 @@ import HomePage from './components/home-page';
 import Router from './components/page-router';
 import ProvidersList from './components/service-providers/list';
 
-jest.mock('../db');
 jest.mock('./components/page-router', () => () => null);
 jest.mock('./components/home-page', () => () => null);
 jest.mock('./components/service-providers/list', () => () => null);
