@@ -4,9 +4,12 @@ import { mount, ReactWrapper } from 'enzyme';
 import App, { View } from '.';
 import HomePage from './components/home-page';
 import Router from './components/page-router';
+import ProvidersList from './components/service-providers/list';
 
 jest.mock('../db');
 jest.mock('./components/page-router', () => () => null);
+jest.mock('./components/home-page', () => () => null);
+jest.mock('./components/service-providers/list', () => () => null);
 
 describe('App', () => {
   let wrapper: ReactWrapper;
@@ -38,11 +41,19 @@ describe('App', () => {
           expect(wrapper.find(HomePage).exists()).toBeFalsy();
         });
         it('should be rendered when view.showPage("home") is called', () => {
-          act(() => {
-            view.showPage('home');
-          });
+          act(() => { view.showPage('home'); });
           wrapper.update();
           expect(wrapper.find(HomePage).exists()).toBeTruthy();
+        });
+      });
+      describe('Providers Page', () => {
+        it('should not be rendered  by default', () => {
+          expect(wrapper.find(ProvidersList).exists()).toBeFalsy();
+        });
+        it('should be rendered when view.showPage("home") is called', () => {
+          act(() => { view.showPage('providers'); });
+          wrapper.update();
+          expect(wrapper.find(ProvidersList).exists()).toBeTruthy();
         });
       });
     });

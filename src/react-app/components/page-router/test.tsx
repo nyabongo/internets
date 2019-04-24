@@ -12,19 +12,29 @@ describe('PageRouter', () => {
       showPage: jest.fn(),
     };
   });
+  function mountAtPath(path: string) {
+    wrapper = mount(
+      <MemoryRouter initialEntries={[path]}>
+        <PageRouter view={view} />
+      </MemoryRouter>,
+    );
+    expect(wrapper.html()).toBeNull();
+    return wrapper;
+  }
   describe('at the home route', () => {
     beforeEach(() => {
-      wrapper = mount(
-        <MemoryRouter initialEntries={['/']}>
-          <PageRouter view={view} />
-        </MemoryRouter>,
-      );
+      wrapper = mountAtPath('/');
     });
     it('should call view.showPage with home', () => {
       expect(view.showPage).toHaveBeenCalledWith('home');
     });
-    it('should return null', () => {
-      expect(wrapper.html()).toBeNull();
+  });
+  describe('at providers path', () => {
+    beforeEach(() => {
+      wrapper = mountAtPath('/providers');
+    });
+    it('should call view.showPage with home', () => {
+      expect(view.showPage).toHaveBeenCalledWith('providers');
     });
   });
 });

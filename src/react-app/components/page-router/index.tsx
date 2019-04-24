@@ -8,12 +8,8 @@ interface Prop {
 
 const PageRouter = ({ view }: Prop) => (
   <Switch>
-    <Route
-      render={() => {
-        view.showPage('home');
-        return null;
-      }}
-    />
+    <Route path="/providers" render={() => { view.showPage('providers'); return null; }} />
+    <Route render={() => { view.showPage('home'); return null; }} />
   </Switch>
 );
 
