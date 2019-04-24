@@ -1,0 +1,28 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#3b025c",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#7d5003",
+    "activityBarBadge.foreground": "#e7e7e7"
+  },
+  "eslint.options": {
+      "extends": [
+          "airbnb",
+          "plugin:@typescript-eslint/recommended",
+      ],
+      "plugins": [
+          "react",
+          "jsx-a11y",
+          "import"
+      ]
+  },
+  "eslint.validate": [
+      {"language":"javascript","autoFix":true,},
+      {"language":"javascriptreact","autoFix":true,},
+      {"language":"typescript","autoFix":true,},
+      {"language":"typescriptreact","autoFix":true,},
+  ],
+  "eslint.autoFixOnSave": true,
+  "eslint.provideLintTask": true
+}
