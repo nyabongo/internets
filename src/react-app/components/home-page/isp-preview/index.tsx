@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ISPPreview = () => (
   <div>
-      ISPPreview
+    ISPPreview
+    <Link to="/providers">More ISPs</Link>
   </div>
 );
 

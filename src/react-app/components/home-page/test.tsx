@@ -3,6 +3,8 @@ import { mount, ReactWrapper } from 'enzyme';
 import ISPPreview from './isp-preview';
 import HomePage from '.';
 
+jest.mock('./isp-preview', () => () => null);
+
 describe('HomePage', () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
