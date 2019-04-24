@@ -17,10 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage --no-cache",
-    "lint": "tslint -c tslint.json ./**/*.{ts,tsx}"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint": "eslint ./**/*.{ts,tsx} --cache ",
+    "lint:fix": "eslint ./**/*.{ts,tsx} --fix ",
+    "tslint": "tslint -c tslint.json ./**/*.{ts,tsx}"
   },
   "browserslist": [
     ">0.2%",
@@ -29,13 +28,19 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/jest": "^24.0.11",
     "@types/enzyme": "^3.9.0",
     "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.11",
     "@types/react-router-dom": "^4.3.2",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-react": "^7.12.4",
     "jest-enzyme": "^7.0.2",
+    "prettier": "^1.17.0",
     "ts-jest": "^24.0.0",
     "tslint": "^5.13.1",
     "tslint-config-airbnb": "^5.11.1",

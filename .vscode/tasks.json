@@ -11,12 +11,21 @@
     {
       "type": "npm",
       "script": "lint",
-      "problemMatcher": []
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
     },
     {
       "type": "npm",
       "script": "test:coverage",
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "lint:fix",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
     }
   ]
 }
