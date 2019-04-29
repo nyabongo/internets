@@ -5,10 +5,12 @@ import App, { View } from '.';
 import HomePage from './components/home-page';
 import Router from './components/page-router';
 import ProvidersList from './components/service-providers/list';
+import ProviderPage from './components/service-providers/single';
 
 jest.mock('./components/page-router', () => () => null);
 jest.mock('./components/home-page', () => () => null);
 jest.mock('./components/service-providers/list', () => () => null);
+jest.mock('./components/service-providers/single', () => () => null);
 
 describe('App', () => {
   let wrapper: ReactWrapper;
@@ -53,6 +55,21 @@ describe('App', () => {
           act(() => { view.showPage('providers'); });
           wrapper.update();
           expect(wrapper.find(ProvidersList).exists()).toBeTruthy();
+        });
+      });
+      describe('Single Provider Page', () => {
+        const providerId = 'provider-id';
+        let providerPage: ReactWrapper<{ id: string }>;
+        beforeEach(() => {
+          act(() => { view.showPage('provider', { providerId }); });
+          wrapper.update();
+          providerPage = wrapper.find(ProviderPage);
+        });
+        it('should be rendered when view.showPage("home") is called', () => {
+          expect(providerPage.exists()).toBeTruthy();
+        });
+        it('should have id as its id prop', () => {
+          expect(providerPage.prop('id')).toBe(providerId);
         });
       });
     });
