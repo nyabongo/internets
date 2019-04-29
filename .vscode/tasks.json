@@ -26,6 +26,11 @@
       "problemMatcher": [
         "$eslint-stylish"
       ]
+    },
+    {
+      "type": "npm",
+      "script": "storybook",
+      "problemMatcher": []
     }
   ]
 }

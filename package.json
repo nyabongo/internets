@@ -20,7 +20,9 @@
     "test:coverage": "react-scripts test --testMatch=**/*test.{ts,tsx} --coverage --no-cache",
     "lint": "eslint ./**/*.{ts,tsx} --cache ",
     "lint:fix": "eslint ./**/*.{ts,tsx} --fix ",
-    "tslint": "tslint -c tslint.json ./**/*.{ts,tsx}"
+    "tslint": "tslint -c tslint.json ./**/*.{ts,tsx}",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "browserslist": {
     "production": [
@@ -35,12 +37,20 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.11",
     "@types/react-router-dom": "^4.3.2",
+    "@types/storybook__addon-actions": "^3.4.2",
+    "@types/storybook__react": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "babel-loader": "^8.0.5",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "eslint-config-airbnb": "^17.1.0",
