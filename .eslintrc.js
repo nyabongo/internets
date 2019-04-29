@@ -21,7 +21,8 @@ module.exports = {
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "@typescript-eslint/explicit-function-return-type":"off",
-    "@typescript-eslint/indent": ["error", 2]
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-explicit-any":"off"
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
   },
