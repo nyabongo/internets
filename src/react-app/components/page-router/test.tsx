@@ -37,4 +37,13 @@ describe('PageRouter', () => {
       expect(view.showPage).toHaveBeenCalledWith('providers');
     });
   });
+  describe('at Provider page', () => {
+    const providerId = 'provider-id';
+    beforeEach(() => {
+      wrapper = mountAtPath(`/providers/${providerId}`);
+    });
+    it('should call view.showPage with provider and the id', () => {
+      expect(view.showPage).toHaveBeenCalledWith('provider', { providerId });
+    });
+  });
 });
