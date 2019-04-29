@@ -1,5 +1,4 @@
 import { createContext } from 'react';
-import { Model } from './interface';
 import db from './static-db';
 
 export const DBContext = createContext(db);
