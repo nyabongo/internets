@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "@types/node": "^11.13.7",
-    "@types/react": "^16.8.14",
+    "@types/node": "^11.13.8",
+    "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -44,7 +44,7 @@
     "@storybook/react": "^5.0.11",
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "^24.0.11",
+    "@types/jest": "^24.0.12",
     "@types/react-router-dom": "^4.3.2",
     "@types/storybook__addon-actions": "^3.4.2",
     "@types/storybook__react": "^4.0.1",
@@ -62,7 +62,7 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
-    "tslint-react": "^3.6.0"
+    "tslint-react": "^4.0.0"
   },
   "jest": {
     "coverageThreshold": {
@@ -72,19 +72,6 @@
         "lines": 100,
         "statements": 100
       }
-    },
-    "collectCoverageFrom": [
-      "**/index.{js,jsx,ts,tsx}",
-      "!**/*stories.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/stories/**",
-      "!**/functions/**",
-      "!**/build/**",
-      "!**/e2etests/**",
-      "!**/coverage/**"
-    ],
-    "coverageReporters": [
-      "text"
-    ]
+    }
   }
 }
