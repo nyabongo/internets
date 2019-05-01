@@ -7,6 +7,7 @@ import { View } from '../..';
 describe('PageRouter', () => {
   let wrapper: ReactWrapper;
   let view: View;
+  const providerId = 'provider-id';
   beforeEach(() => {
     view = {
       showPage: jest.fn(),
@@ -22,28 +23,27 @@ describe('PageRouter', () => {
     return wrapper;
   }
   describe('at the home route', () => {
-    beforeEach(() => {
-      wrapper = mountAtPath('/');
-    });
     it('should call view.showPage with home', () => {
+      wrapper = mountAtPath('/');
       expect(view.showPage).toHaveBeenCalledWith('home');
     });
   });
   describe('at providers path', () => {
-    beforeEach(() => {
-      wrapper = mountAtPath('/providers');
-    });
     it('should call view.showPage with home', () => {
+      wrapper = mountAtPath('/providers');
       expect(view.showPage).toHaveBeenCalledWith('providers');
     });
   });
   describe('at Provider page', () => {
-    const providerId = 'provider-id';
-    beforeEach(() => {
-      wrapper = mountAtPath(`/providers/${providerId}`);
-    });
     it('should call view.showPage with provider and the id', () => {
+      wrapper = mountAtPath(`/providers/${providerId}`);
       expect(view.showPage).toHaveBeenCalledWith('provider', { providerId });
+    });
+  });
+  describe('at provider services page', () => {
+    it('should call view.showpage with "services" and providerId', () => {
+      wrapper = mountAtPath(`/providers/${providerId}/services`);
+      expect(view.showPage).toHaveBeenCalledWith('services', { providerId });
     });
   });
 });

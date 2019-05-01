@@ -4,6 +4,7 @@ import HomePage from './components/home-page';
 import PageRouter from './components/page-router';
 import ServiceProviderList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
+import ProviderServices from './components/provider-services/list';
 
 export interface View {
   showPage: (pageName: string, params?: {providerId: string}) => void;
@@ -26,6 +27,7 @@ const App = () => {
         {page === 'home' && <HomePage />}
         {page === 'providers' && <ServiceProviderList />}
         {page === 'provider' && <ProviderPage id={provider} />}
+        {page === 'services' && <ProviderServices providerId={provider} />}
       </Fragment>
     </BrowserRouter>
   );
