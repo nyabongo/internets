@@ -2,6 +2,7 @@
 // eslint-disable-next-line import/prefer-default-export
 export interface Model {
   getServiceProviders: () => Promise<any>;
+  getServiceProviderById: (id: string) => Promise<ServiceProvider>;
 }
 
 export interface Thing {
