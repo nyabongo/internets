@@ -18,3 +18,7 @@ export interface ServiceProvider extends Thing {
   address?: string;
   website: string;
 }
+
+export interface Service extends Thing {
+  technology: [string];
+}
