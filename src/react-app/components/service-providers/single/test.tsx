@@ -2,9 +2,13 @@ import React from 'react';
 import {
   render, cleanup, RenderResult,
 } from 'react-testing-library';
+import { MemoryRouter } from 'react-router-dom';
 import ProviderPage from '.';
 import { DBProvider } from '../../../../db';
+import db from '../../../../db/static-db';
 import { Model, ServiceProvider } from '../../../../db/interface';
+
+jest.mock('../../../../db/static-db');
 
 const provider: ServiceProvider = {
   id: 'one',
@@ -21,16 +25,15 @@ describe('ProviderPage', () => {
   });
 
   let renderResult: RenderResult;
-  let db: Model;
   beforeAll(() => {
-    db = {
-      getServiceProviderById: jest.fn(() => Promise.resolve(provider)),
-      getServiceProviders: jest.fn(),
-    };
+    const mockGetServiceProviderById = db.getServiceProviderById as jest.Mock;
+    mockGetServiceProviderById.mockReturnValueOnce(Promise.resolve(provider));
     renderResult = render(
-      <DBProvider value={db}>
-        <ProviderPage id={provider.id} />
-      </DBProvider>,
+      <MemoryRouter>
+        <DBProvider value={db}>
+          <ProviderPage id={provider.id} />
+        </DBProvider>
+      </MemoryRouter>,
     );
   });
   it('should call getServiceProviderById', () => {
@@ -47,5 +50,10 @@ describe('ProviderPage', () => {
   it('should show the description as the contentinfo', () => {
     const desc = renderResult.getByRole('contentinfo');
     expect(desc.textContent).toBe(provider.description);
+  });
+  it('should have a link to the provider services', () => {
+    const link = renderResult.getByTestId('services-link') as HTMLAnchorElement;
+    expect(link.text).toBe('Services');
+    expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services`);
   });
 });
