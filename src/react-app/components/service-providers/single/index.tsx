@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useEffect, useContext, useLayoutEffect,
+} from 'react';
 import {
   createStyles, withStyles, Card, CardHeader, CardContent,
 } from '@material-ui/core';
@@ -26,6 +28,11 @@ const ProviderPage = ({ id, classes }: Proptypes) => {
     });
   }, [id, getServiceProviderById]);
 
+  useLayoutEffect(() => {
+    if (provider) {
+      document.title = provider.name;
+    }
+  }, [provider]);
   return (
     <div>
       <Card>

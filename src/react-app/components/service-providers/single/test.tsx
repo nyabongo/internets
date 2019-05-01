@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, cleanup, RenderResult } from 'react-testing-library';
+import {
+  render, cleanup, RenderResult,
+} from 'react-testing-library';
 import ProviderPage from '.';
 import { DBProvider } from '../../../../db';
 import { Model, ServiceProvider } from '../../../../db/interface';
@@ -36,6 +38,7 @@ describe('ProviderPage', () => {
   });
   it('should show the provider name as the title', () => {
     expect(renderResult.getByRole('heading').textContent).toBe(provider.name);
+    expect(document.title).toBe(provider.name);
   });
   it('should show the banner', () => {
     const banner = renderResult.getByRole('banner') as HTMLImageElement;
