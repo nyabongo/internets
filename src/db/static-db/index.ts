@@ -6,6 +6,9 @@ const staticDB: Model = {
   getServiceProviderById: (id: string) => Promise.resolve(
     data.serviceProviders.filter(p => p.id === id)[0],
   ),
+  getProviderServices: (providerId: string) => Promise.resolve(
+    data.services.filter(s => s.providerId === providerId),
+  ),
 };
 
 export default staticDB;

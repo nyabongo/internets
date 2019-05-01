@@ -3,6 +3,7 @@
 export interface Model {
   getServiceProviders: () => Promise<any>;
   getServiceProviderById: (id: string) => Promise<ServiceProvider>;
+  getProviderServices: (id: string) => Promise<Service []>;
 }
 
 export interface Thing {
