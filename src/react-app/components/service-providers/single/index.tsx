@@ -20,22 +20,27 @@ const style = createStyles({
   },
 });
 interface Proptypes {
-  id: string;
+  providerId: string;
+  showServices?: boolean;
   classes: any;
 }
 
 const PListItem = (props: any) => <ListItem button component={Link} {...props} />;
 
-const ProviderPage = ({ id, classes }: Proptypes) => {
+const ProviderPage = ({ providerId, classes, showServices }: Proptypes) => {
   const { getServiceProviderById } = useContext(DBContext);
   const [provider, setProvider] = useState();
   useEffect(() => {
-    getServiceProviderById(id).then((result) => {
+    getServiceProviderById(providerId).then((result) => {
       setProvider(result);
     });
-  }, [id, getServiceProviderById]);
+  }, [providerId, getServiceProviderById]);
 
-  useLayoutEffect(() => { if (provider) document.title = provider.name; }, [provider]);
+  useLayoutEffect(() => {
+    if (provider) {
+      document.title = `${provider.name}${showServices ? ' Services' : ''}`;
+    }
+  }, [provider, showServices]);
 
   return (
     <div>

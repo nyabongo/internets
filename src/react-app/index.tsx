@@ -5,17 +5,26 @@ import PageRouter from './components/page-router';
 import ServiceProviderList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
 
+interface ParamTypes {
+  providerId: string;
+  showServices?: boolean;
+}
+
 export interface View {
-  showPage: (pageName: string, params?: {providerId: string}) => void;
+  showPage: (pageName: string, params?: ParamTypes) => void;
 }
 
 const App = () => {
   const [page, setPage] = useState('');
-  const [provider, setProvider] = useState('');
+  const [providerId, setProviderId] = useState('');
+  const [showServices, setShowServices] = useState(false);
   const view: View = {
-    showPage: (pageName: string, params?: {providerId: string}) => {
+    showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
-      if (params && params.providerId) { setProvider(params.providerId); }
+      if (params && params.providerId) { setProviderId(params.providerId); }
+      if (params && params.showServices) {
+        setShowServices(params.showServices);
+      } else setShowServices(false);
     },
   };
 
@@ -25,7 +34,7 @@ const App = () => {
         <PageRouter view={view} />
         {page === 'home' && <HomePage />}
         {page === 'providers' && <ServiceProviderList />}
-        {page === 'provider' && <ProviderPage id={provider} />}
+        {page === 'provider' && <ProviderPage providerId={providerId} showServices={showServices} />}
       </Fragment>
     </BrowserRouter>
   );

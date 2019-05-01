@@ -63,17 +63,39 @@ describe('App', () => {
 
       describe('Single Provider Page', () => {
         const providerId = 'provider-id';
-        let providerPage: ReactWrapper<{ id: string }>;
+        let providerPage: ReactWrapper<any>;
         beforeEach(() => {
           act(() => { view.showPage('provider', { providerId }); });
+          wrapper.update();
+          providerPage = wrapper.find(ProviderPage);
+        });
+        it('should have providerId as its providerId prop', () => {
+          expect(providerPage.prop('providerId')).toBe(providerId);
+        });
+        it('should have a false showServicesprop', () => {
+          expect(providerPage.prop('showServices')).toBe(false);
+        });
+      });
+
+      describe('a providers services page', () => {
+        const providerId = 'provider-id';
+        let providerPage: ReactWrapper<any>;
+        const showServices = true;
+        beforeEach(() => {
+          act(() => {
+            view.showPage('provider', { providerId, showServices });
+          });
           wrapper.update();
           providerPage = wrapper.find(ProviderPage);
         });
         it('should be rendered when view.showPage("home") is called', () => {
           expect(providerPage.exists()).toBeTruthy();
         });
-        it('should have id as its id prop', () => {
-          expect(providerPage.prop('id')).toBe(providerId);
+        it('should have providerId as its providerId prop', () => {
+          expect(providerPage.prop('providerId')).toBe(providerId);
+        });
+        it('should have the same showservices prop', () => {
+          expect(providerPage.prop('showServices')).toBe(showServices);
         });
       });
     });
