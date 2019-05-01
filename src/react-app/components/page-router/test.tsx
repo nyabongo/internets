@@ -41,9 +41,9 @@ describe('PageRouter', () => {
     });
   });
   describe('at provider services page', () => {
-    it('should call view.showpage with "services" and providerId', () => {
+    it('should call view.showpage with "provider" and providerId and showServices set to true', () => {
       wrapper = mountAtPath(`/providers/${providerId}/services`);
-      expect(view.showPage).toHaveBeenCalledWith('services', { providerId });
+      expect(view.showPage).toHaveBeenCalledWith('provider', { providerId, showServices: true });
     });
   });
 });

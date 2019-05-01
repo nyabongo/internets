@@ -6,13 +6,11 @@ import HomePage from './components/home-page';
 import Router from './components/page-router';
 import ProvidersList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
-import ProviderServicesPage from './components/provider-services/list';
 
 jest.mock('./components/page-router', () => () => null);
 jest.mock('./components/home-page', () => () => null);
 jest.mock('./components/service-providers/list', () => () => null);
 jest.mock('./components/service-providers/single', () => () => null);
-jest.mock('./components/provider-services/list', () => () => null);
 
 describe('App', () => {
   let wrapper: ReactWrapper;
@@ -76,22 +74,6 @@ describe('App', () => {
         });
         it('should have id as its id prop', () => {
           expect(providerPage.prop('id')).toBe(providerId);
-        });
-      });
-
-      describe('Provider services pag', () => {
-        const providerId = 'provider-id';
-        let providerServicesPage: ReactWrapper<{providerId: string}>;
-        beforeEach(() => {
-          act(() => { view.showPage('services', { providerId }); });
-          wrapper.update();
-          providerServicesPage = wrapper.find(ProviderServicesPage);
-        });
-        it('should be rendered when view.showPage("home") is called', () => {
-          expect(providerServicesPage.exists()).toBeTruthy();
-        });
-        it('should have id as its id prop', () => {
-          expect(providerServicesPage.prop('providerId')).toBe(providerId);
         });
       });
     });
