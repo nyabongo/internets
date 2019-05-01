@@ -4,9 +4,10 @@ import {
   render, cleanup, RenderResult, act,
 } from 'react-testing-library';
 import { DBProvider } from '../../../../db';
-import { Model } from '../../../../db/interface';
+import db from '../../../../db/static-db';
 import ProvidersList from '.';
 
+jest.mock('../../../../db/static-db');
 jest.mock('../../view-widgets/icon', () => (p: any) => (
   <div
     data-props={JSON.stringify(p)}
@@ -15,7 +16,6 @@ jest.mock('../../view-widgets/icon', () => (p: any) => (
 ));
 
 describe('ProvidersList', () => {
-  let db: Model;
   let renderResult: RenderResult;
   const providers = [
     { id: 'one', logo: 'one.jpg', name: 'one' },
@@ -29,7 +29,8 @@ describe('ProvidersList', () => {
   beforeEach(() => {
     act(() => {
       const promise = new Promise((resolve, reject) => { deffered = { resolve, reject }; });
-      db = { getServiceProviders: jest.fn(() => promise) };
+      const mockGetServiceProviders = db.getServiceProviders as jest.Mock;
+      mockGetServiceProviders.mockReturnValueOnce(promise);
       renderResult = render(<DBProvider value={db}><ProvidersList /></DBProvider>);
     });
   });
