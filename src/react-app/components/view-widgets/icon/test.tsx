@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  render, RenderResult, cleanup, fireEvent,
+  render, RenderResult, cleanup,
 } from 'react-testing-library';
 import { MemoryRouter } from 'react-router-dom';
 import Icon from '.';

@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 import ProviderPage from '.';
 import { DBProvider } from '../../../../db';
 import db from '../../../../db/static-db';
-import { Model, ServiceProvider } from '../../../../db/interface';
+import { ServiceProvider } from '../../../../db/interface';
 
 jest.mock('../../../../db/static-db');
 
