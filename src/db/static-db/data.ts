@@ -1,4 +1,10 @@
-export default {
+import { ServiceProvider, Service } from '../interface';
+
+
+const data: {
+  serviceProviders: ServiceProvider[];
+  services: Service[];
+} = {
   serviceProviders: [
     {
       id: 'one',
@@ -26,7 +32,7 @@ export default {
   services: [
     {
       id: 'Handmade',
-      provider: 'one',
+      providerId: 'one',
       name: 'Handmade Service',
       description: 'Amet amet consectetur ipsum commodo ea consectetur cupidatat commodo consectetur ullamco occaecat proident amet. Ex in proident cupidatat culpa. Enim est officia minim aliqua irure veniam sit ut. Voluptate irure minim duis id non sint aliqua aliquip. Est consectetur ullamco commodo minim dolor amet et velit nisi cillum est non sit.',
       banner: 'http://lorempixel.com/960/480/business/Handmade',
@@ -34,7 +40,7 @@ export default {
     },
     {
       id: 'Small',
-      provider: 'one',
+      providerId: 'one',
       name: 'Small Service',
       description: 'Pariatur sit qui irure dolore culpa enim qui. Cillum duis consequat nisi sit labore cillum officia exercitation aliqua irure nisi ea culpa ea. Mollit nisi excepteur adipisicing ipsum ullamco. Dolor id in reprehenderit eiusmod incididunt cupidatat ad. Nostrud nisi et sit nisi commodo sit excepteur irure ullamco sunt Lorem. Duis consequat aliquip enim ea duis aute consectetur tempor in laborum. Elit est ad ea deserunt sint Lorem fugiat nisi laborum exercitation in mollit.',
       banner: 'http://lorempixel.com/960/480/business/Small',
@@ -42,7 +48,7 @@ export default {
     },
     {
       id: 'Intelligent',
-      provider: 'two',
+      providerId: 'two',
       name: 'Intelligent Service',
       description: 'Amet ullamco anim duis esse commodo mollit nisi id consequat ipsum enim. Ut consequat sit reprehenderit aute culpa. Adipisicing amet exercitation amet aute cupidatat non. Reprehenderit occaecat pariatur velit ullamco eiusmod labore proident ea sunt qui labore labore sit. Sunt labore sint mollit sit labore sint.',
       banner: 'http://lorempixel.com/960/480/business/Intelligent',
@@ -50,15 +56,15 @@ export default {
     },
     {
       id: 'Incredible',
+      providerId: 'two',
       name: 'Incredible Service',
-      provider: 'two',
       description: 'Anim et do do elit nostrud quis pariatur exercitation id dolor eu aute magna commodo. Pariatur laborum irure incididunt laborum voluptate nulla occaecat officia dolore elit. Occaecat deserunt ut magna Lorem eiusmod officia consequat ipsum cillum. Amet exercitation fugiat laborum incididunt est consectetur. Qui excepteur enim consequat velit aliqua consequat voluptate. Elit ad proident dolor aliqua officia cillum.',
       banner: 'http://lorempixel.com/960/480/business/Incredible',
       technology: ['4G/LTE', '3G/UMTS', 'WCDMA'],
     },
     {
-      provider: 'three',
       id: 'Handmade',
+      providerId: 'three',
       name: 'Handmade Service',
       description: 'Sint excepteur dolore consequat nulla qui aute anim magna do qui occaecat aliquip. Tempor nisi occaecat laborum duis officia mollit esse deserunt officia nisi quis laborum sunt. Quis Lorem dolor elit tempor tempor sit incididunt commodo sint dolore sunt et eu ipsum. Esse ipsum sint et eu dolor in voluptate dolor dolor Lorem tempor culpa pariatur. Proident consectetur voluptate labore ullamco aliqua nostrud laborum non irure velit adipisicing quis.',
       banner: 'http://lorempixel.com/960/480/business/three',
@@ -66,11 +72,13 @@ export default {
     },
     {
       id: 'Generic',
+      providerId: 'three',
       name: 'Generic Service',
-      provider: 'three',
       description: 'Nulla quis cillum deserunt consectetur sit labore et cillum est pariatur ullamco mollit. Fugiat labore sint ad tempor mollit mollit magna ad consequat occaecat laboris consequat magna irure. Anim laborum cillum ipsum dolore qui nulla laborum anim aliqua laboris Lorem do. Duis sit cupidatat reprehenderit minim nisi enim in eiusmod nostrud. Nulla nulla proident commodo velit ullamco est laborum. Quis velit Lorem officia in velit. Eiusmod dolore labore qui ad proident proident sunt labore reprehenderit.',
       banner: 'http://lorempixel.com/960/480/business/Generic',
       technology: ['4G/LTE', '3G/UMTS', 'WCDMA'],
     },
   ],
 };
+
+export default data;

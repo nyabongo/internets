@@ -10,15 +10,18 @@ export interface Thing {
   name: string;
   description: string;
   website?: string;
-  banner: string;
-  logo: string;
+  banner?: string;
+  logo?: string;
 }
 
 export interface ServiceProvider extends Thing {
+  logo: string;
+  banner: string;
   address?: string;
   website: string;
 }
 
 export interface Service extends Thing {
-  technology: [string];
+  providerId: string;
+  technology: string [];
 }
