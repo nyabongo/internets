@@ -98,6 +98,28 @@ describe('App', () => {
           expect(providerPage.prop('showServices')).toBe(showServices);
         });
       });
+
+      describe('a service page', () => {
+        const providerId = 'provider-id';
+        const serviceId = 'service-id';
+        let providerPage: ReactWrapper<any>;
+        beforeEach(() => {
+          act(() => {
+            view.showPage('provider', { providerId, serviceId });
+          });
+          wrapper.update();
+          providerPage = wrapper.find(ProviderPage);
+        });
+        it('should be rendered when view.showPage("home") is called', () => {
+          expect(providerPage.exists()).toBeTruthy();
+        });
+        it('should have providerId as its providerId prop', () => {
+          expect(providerPage.prop('providerId')).toBe(providerId);
+        });
+        it('should have serviceId as its serviceId prop', () => {
+          expect(providerPage.prop('serviceId')).toBe(serviceId);
+        });
+      });
     });
   });
 });

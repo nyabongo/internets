@@ -8,6 +8,8 @@ import ProviderPage from './components/service-providers/single';
 interface ParamTypes {
   providerId: string;
   showServices?: boolean;
+  serviceId?: string;
+  planId?: string;
 }
 
 export interface View {
@@ -17,14 +19,16 @@ export interface View {
 const App = () => {
   const [page, setPage] = useState('');
   const [providerId, setProviderId] = useState('');
+  const [serviceId, setServiceId] = useState('');
   const [showServices, setShowServices] = useState(false);
   const view: View = {
     showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
-      if (params && params.providerId) { setProviderId(params.providerId); }
-      if (params && params.showServices) {
-        setShowServices(params.showServices);
-      } else setShowServices(false);
+      if (params) {
+        setProviderId(params.providerId || '');
+        setServiceId(params.serviceId || '');
+        setShowServices(params.showServices || false);
+      }
     },
   };
 
@@ -34,7 +38,13 @@ const App = () => {
         <PageRouter view={view} />
         {page === 'home' && <HomePage />}
         {page === 'providers' && <ServiceProviderList />}
-        {page === 'provider' && <ProviderPage providerId={providerId} showServices={showServices} />}
+        {page === 'provider' && (
+          <ProviderPage
+            providerId={providerId}
+            serviceId={serviceId}
+            showServices={showServices}
+          />
+        )}
       </Fragment>
     </BrowserRouter>
   );
