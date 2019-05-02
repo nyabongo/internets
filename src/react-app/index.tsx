@@ -21,6 +21,7 @@ const App = () => {
   const [page, setPage] = useState('');
   const [providerId, setProviderId] = useState('');
   const [serviceId, setServiceId] = useState('');
+  const [planId, setPlanId] = useState('');
   const [showServices, setShowServices] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
   const view: View = {
@@ -29,6 +30,7 @@ const App = () => {
       if (params) {
         setProviderId(params.providerId);
         setServiceId(params.serviceId || '');
+        setPlanId(params.planId || '');
         setShowServices(params.showServices || false);
         setShowPlans(params.showPlans || false);
       }
@@ -45,6 +47,7 @@ const App = () => {
           <ProviderPage
             providerId={providerId}
             serviceId={serviceId}
+            planId={planId}
             showServices={showServices}
             showPlans={showPlans}
           />

@@ -146,6 +146,32 @@ describe('App', () => {
           expect(providerPage.prop('showPlans')).toBe(showPlans);
         });
       });
+
+      describe('a provider service plan page', () => {
+        const providerId = 'provider-id';
+        const serviceId = 'service-id';
+        const planId = 'plan-id';
+        let providerPage: ReactWrapper<any>;
+        beforeEach(() => {
+          act(() => {
+            view.showPage('provider', { providerId, serviceId, planId });
+          });
+          wrapper.update();
+          providerPage = wrapper.find(ProviderPage);
+        });
+        it('should be rendered when view.showPage("home") is called', () => {
+          expect(providerPage.exists()).toBeTruthy();
+        });
+        it('should have providerId as its providerId prop', () => {
+          expect(providerPage.prop('providerId')).toBe(providerId);
+        });
+        it('should have serviceId as its serviceId prop', () => {
+          expect(providerPage.prop('serviceId')).toBe(serviceId);
+        });
+        it('should have planId as its planId prop', () => {
+          expect(providerPage.prop('planId')).toBe(planId);
+        });
+      });
     });
   });
 });

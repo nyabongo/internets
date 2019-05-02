@@ -9,6 +9,7 @@ describe('PageRouter', () => {
   let view: View;
   const providerId = 'provider-id';
   const serviceId = 'service-id';
+  const planId = 'plan-id';
   beforeEach(() => {
     view = {
       showPage: jest.fn(),
@@ -57,6 +58,12 @@ describe('PageRouter', () => {
     it('should call view.showpage with "provider",providerId,serviceid and showPlans set to true ', () => {
       wrapper = mountAtPath(`/providers/${providerId}/services/${serviceId}/plans`);
       expect(view.showPage).toHaveBeenCalledWith('provider', { providerId, serviceId, showPlans: true });
+    });
+  });
+  describe('at the provider service plan page', () => {
+    it('should call view.showpage with "provider",providerId,serviceid and planId ', () => {
+      wrapper = mountAtPath(`/providers/${providerId}/services/${serviceId}/plans/${planId}`);
+      expect(view.showPage).toHaveBeenCalledWith('provider', { providerId, serviceId, planId });
     });
   });
 });

@@ -32,6 +32,7 @@ interface Proptypes {
   showServices?: boolean;
   showPlans?: boolean;
   serviceId?: string;
+  planId?: string;
   classes: any;
 }
 
