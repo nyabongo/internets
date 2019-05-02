@@ -27,7 +27,7 @@ const App = () => {
     showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
       if (params) {
-        setProviderId(params.providerId || '');
+        setProviderId(params.providerId);
         setServiceId(params.serviceId || '');
         setShowServices(params.showServices || false);
         setShowPlans(params.showPlans || false);

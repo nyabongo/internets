@@ -131,13 +131,12 @@ const ProviderPage = ({
           </ListItem>
         )}
         {
-          services && services.map((({ id, name, logo }: Service) => (
+          services && services.map((({ id, name }: Service) => (
             <ListItem
               key={id}
               data-testid="service-link"
               to={`/providers/${providerId}/services/${id}`}
             >
-              {logo && <Avatar src={logo} />}
               <ListItemText primary={name} />
             </ListItem>
           )))
