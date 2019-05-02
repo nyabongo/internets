@@ -19,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --testMatch=**/*test.{ts,tsx} ",
-    "test:coverage": "react-scripts test --testMatch=**/*test.{ts,tsx} --coverage --no-cache",
+    "test:coverage": "react-scripts test --testMatch=**/*test.{ts,tsx} --coverage --no-cache --watchAll=false",
     "lint": "eslint ./**/*.{ts,tsx} --cache ",
     "lint:fix": "eslint ./**/*.{ts,tsx} --fix ",
     "tslint": "tslint -c tslint.json ./**/*.{ts,tsx}",
@@ -75,6 +75,16 @@
         "lines": 100,
         "statements": 100
       }
-    }
+    },
+    "collectCoverageFrom": [
+      "**/index.{js,jsx,ts,tsx}",
+      "!**/*stories.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/stories/**",
+      "!**/functions/**",
+      "!**/build/**",
+      "!**/e2etests/**",
+      "!**/coverage/**"
+    ]
   }
 }
