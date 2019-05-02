@@ -4,7 +4,7 @@ export interface Model {
   getServiceProviders: () => Promise<any>;
   getServiceProviderById: (id: string) => Promise<ServiceProvider>;
   getServiceById: (id: string) => Promise<Service>;
-  getProviderServices: (id: string) => Promise<Service []>;
+  getProviderServices: (id: string) => Promise<Service[]>;
 }
 
 export interface Thing {
@@ -25,5 +25,25 @@ export interface ServiceProvider extends Thing {
 
 export interface Service extends Thing {
   providerId: string;
-  technology: string [];
+  technology: string[];
+}
+
+export interface Plan extends Thing {
+  providerId: string;
+  serviceId: string;
+  price: {
+    value: number;
+    currency: string;
+    relativeMagnitude: number;
+  };
+  volume: {
+    value: number | 'Unlimited';
+    unit: string;
+    relativeMagnitude: number;
+  };
+  duration: {
+    value: number;
+    unit: string;
+    relativeMagnitude: number;
+  };
 }
