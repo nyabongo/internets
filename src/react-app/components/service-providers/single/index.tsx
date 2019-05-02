@@ -90,7 +90,7 @@ const ProviderPage = ({
     if (service && provider && showPlans) {
       document.title = `Plans from ${service.name} by ${provider.name}`;
     }
-  }, [provider, service, showServices]);
+  }, [provider, service, showPlans, showServices]);
 
   return (
     <>
