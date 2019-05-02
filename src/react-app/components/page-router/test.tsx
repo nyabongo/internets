@@ -48,9 +48,15 @@ describe('PageRouter', () => {
     });
   });
   describe('at provider service page', () => {
-    it('should call view.showpage with "provider" and providerId and showServices set to true', () => {
+    it('should call view.showpage with "provider" and providerId', () => {
       wrapper = mountAtPath(`/providers/${providerId}/services/${serviceId}`);
       expect(view.showPage).toHaveBeenCalledWith('provider', { providerId, serviceId });
+    });
+  });
+  describe('at the provider service plans page', () => {
+    it('should call view.showpage with "provider",providerId,serviceid and showPlans set to true ', () => {
+      wrapper = mountAtPath(`/providers/${providerId}/services/${serviceId}/plans`);
+      expect(view.showPage).toHaveBeenCalledWith('provider', { providerId, serviceId, showPlans: true });
     });
   });
 });

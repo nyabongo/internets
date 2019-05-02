@@ -30,6 +30,7 @@ const style = createStyles({
 interface Proptypes {
   providerId: string;
   showServices?: boolean;
+  showPlans?: boolean;
   serviceId?: string;
   classes: any;
 }
@@ -37,7 +38,7 @@ interface Proptypes {
 const ListItem = (props: any) => <Li button component={Link} {...props} />;
 
 const ProviderPage = ({
-  providerId, serviceId, classes, showServices,
+  providerId, serviceId, classes, showServices, showPlans,
 }: Proptypes) => {
   const { getServiceProviderById, getProviderServices, getServiceById } = useContext(DBContext);
   const [provider, setProvider] = useState();

@@ -9,6 +9,13 @@ interface Prop {
 const PageRouter = ({ view }: Prop) => (
   <Switch>
     <Route
+      path="/providers/:providerId/services/:serviceId/plans"
+      render={({ match: { params } }) => {
+        view.showPage('provider', { showPlans: true, ...params });
+        return null;
+      }}
+    />
+    <Route
       path="/providers/:providerId/services/:serviceId"
       render={({ match: { params } }) => {
         view.showPage('provider', params);

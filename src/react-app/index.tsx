@@ -8,6 +8,7 @@ import ProviderPage from './components/service-providers/single';
 interface ParamTypes {
   providerId: string;
   showServices?: boolean;
+  showPlans?: boolean;
   serviceId?: string;
   planId?: string;
 }
@@ -21,6 +22,7 @@ const App = () => {
   const [providerId, setProviderId] = useState('');
   const [serviceId, setServiceId] = useState('');
   const [showServices, setShowServices] = useState(false);
+  const [showPlans, setShowPlans] = useState(false);
   const view: View = {
     showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
@@ -28,6 +30,7 @@ const App = () => {
         setProviderId(params.providerId || '');
         setServiceId(params.serviceId || '');
         setShowServices(params.showServices || false);
+        setShowPlans(params.showPlans || false);
       }
     },
   };
@@ -43,6 +46,7 @@ const App = () => {
             providerId={providerId}
             serviceId={serviceId}
             showServices={showServices}
+            showPlans={showPlans}
           />
         )}
       </Fragment>
