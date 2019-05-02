@@ -9,7 +9,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Li from '@material-ui/core/ListItem';
 import { Link } from 'react-router-dom';
 import { DBContext } from '../../../../db';
-import { Service } from '../../../../db/interface';
+import { Service, Plan } from '../../../../db/interface';
 import DetailCard from '../../view-widgets/detail-card';
 
 const style = createStyles({
@@ -40,9 +40,12 @@ const ListItem = (props: any) => <Li button component={Link} {...props} />;
 const ProviderPage = ({
   providerId, serviceId, classes, showServices, showPlans,
 }: Proptypes) => {
-  const { getServiceProviderById, getProviderServices, getServiceById } = useContext(DBContext);
+  const {
+    getServiceProviderById, getProviderServices, getServiceById, getServicePlans,
+  } = useContext(DBContext);
   const [provider, setProvider] = useState();
   const [services, setServices] = useState();
+  const [plans, setPlans] = useState();
   const [service, setService] = useState();
 
   useEffect(() => {
@@ -67,6 +70,15 @@ const ProviderPage = ({
     } else setServices([]);
   }, [providerId, showServices, getProviderServices]);
 
+  useEffect(() => {
+    if (showPlans && serviceId) {
+      getServicePlans(serviceId, providerId).then((result) => {
+        setPlans(result);
+      });
+    } else setPlans([]);
+  }, [providerId, serviceId, showPlans, getServicePlans]);
+
+
   useLayoutEffect(() => {
     if (provider) {
       document.title = `${provider.name}${showServices ? ' Services' : ''}`;
@@ -74,26 +86,35 @@ const ProviderPage = ({
     if (service && provider) {
       document.title = `${service.name} by ${provider.name}`;
     }
+    if (service && provider && showPlans) {
+      document.title = `Plans from ${service.name} by ${provider.name}`;
+    }
   }, [provider, service, showServices]);
 
   return (
     <>
-      <Collapse in={!!service} mountOnEnter unmountOnExit>
+      <Collapse in={!!service && !showPlans} mountOnEnter unmountOnExit>
         <ListItem data-testid="services-link" button={false} to={`/providers/${providerId}/services`}>
           <ChevronLeft />
           <ListItemText primary="Services" secondary={provider && provider.name} />
         </ListItem>
       </Collapse>
-      <Collapse in={!showServices} mountOnEnter unmountOnExit>
+      <Collapse in={!showServices && !showPlans} mountOnEnter unmountOnExit>
         {(service || provider) && <DetailCard thing={service || provider} />}
       </Collapse>
-      <Fade in={showServices} mountOnEnter unmountOnExit>
+      <Fade in={showServices || showPlans} mountOnEnter unmountOnExit>
         <Card className={classes.cards}>
-          {provider && (
+          {provider && !service && (
             <ListItem data-testid="provider-link" to={`/providers/${provider.id}`}>
               <ChevronLeft />
               <Avatar src={provider.logo}>{provider.name[0]}</Avatar>
               <ListItemText primary={provider.name} />
+            </ListItem>
+          )}
+          {service && provider && (
+            <ListItem data-testid="service-link" to={`/providers/${provider.id}/services/${service.id}`}>
+              <ChevronLeft />
+              <ListItemText primary={service.name} secondary={provider.name} />
             </ListItem>
           )}
         </Card>
@@ -118,6 +139,17 @@ const ProviderPage = ({
             >
               {logo && <Avatar src={logo} />}
               <ListItemText primary={name} />
+            </ListItem>
+          )))
+        }
+        {
+          plans && plans.map((({ id, name }: Plan) => (
+            <ListItem
+              key={id}
+              data-testid="plan-link"
+              to={`/providers/${providerId}/services/${serviceId}/plans/${id}`}
+            >
+              <ListItemText secondary={name} />
             </ListItem>
           )))
         }

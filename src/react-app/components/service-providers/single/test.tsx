@@ -3,11 +3,17 @@ import {
   render, cleanup, RenderResult,
 } from 'react-testing-library';
 import { MemoryRouter } from 'react-router-dom';
+import sample from 'lodash/sample';
+import find from 'lodash/find';
 import ProviderPage from '.';
 import data from '../../../../db/static-db/data';
+import { Service, ServiceProvider, Plan } from '../../../../db/interface';
 
 
-const provider = data.serviceProviders[0];
+const plan = sample(data.plans) as Plan;
+const provider = find(data.serviceProviders, { id: plan.providerId }) as ServiceProvider;
+const service = find(data.services, { id: plan.serviceId }) as Service;
+
 
 describe('ProviderPage', () => {
   afterAll(() => {
@@ -71,10 +77,10 @@ describe('Provider Services page', () => {
   it('should show a link to each of the providers services', () => {
     const services = data.services.filter(s => s.providerId === provider.id);
     const links = renderResult.getAllByTestId('service-link');
-    services.forEach((service, index) => {
+    services.forEach((svc, index) => {
       const link = links[index] as HTMLAnchorElement;
-      expect(link.textContent).toBe(service.name);
-      expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}`);
+      expect(link.textContent).toBe(svc.name);
+      expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${svc.id}`);
     });
   });
 });
@@ -84,7 +90,6 @@ describe('Service Page', () => {
     cleanup();
   });
 
-  const service = data.services.filter(s => s.providerId === provider.id)[0];
   let renderResult: RenderResult;
   beforeAll(() => {
     renderResult = render(
@@ -114,5 +119,41 @@ describe('Service Page', () => {
     expect(link.text).toContain('Services');
     expect(link.text).toContain(provider.name);
     expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services`);
+  });
+});
+
+describe('Plans page', () => {
+  afterAll(() => {
+    cleanup();
+  });
+
+  let renderResult: RenderResult;
+  beforeAll(() => {
+    renderResult = render(
+      <MemoryRouter>
+        <ProviderPage providerId={plan.providerId} serviceId={plan.serviceId} showPlans />
+      </MemoryRouter>,
+    );
+  });
+  it('Should set the document title', () => {
+    expect(document.title).toBe(`Plans from ${service.name} by ${provider.name}`);
+  });
+  it('should not show thing details  ', () => {
+    expect(renderResult.queryByTestId('thing-detail')).toBeNull();
+  });
+  it('should show a link to the Service', () => {
+    const link = renderResult.getByTestId('service-link') as HTMLAnchorElement;
+    expect(link.text).toContain(service.name);
+    expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}`);
+  });
+  it('should show a link to each of the plans', () => {
+    const plans = data.plans.filter(pln => pln.providerId === provider.id
+      && pln.serviceId === service.id);
+    const links = renderResult.getAllByTestId('plan-link');
+    plans.forEach((pln, index) => {
+      const link = links[index] as HTMLAnchorElement;
+      expect(link.textContent).toContain(pln.name);
+      expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}/plans/${pln.id}`);
+    });
   });
 });
