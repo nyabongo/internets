@@ -17,4 +17,9 @@ describe('StaticDB', () => {
     const result = await db.getProviderServices(provider.id);
     expect(result).toEqual(data.services.filter(s => s.providerId === provider.id));
   });
+  it('should return a service ', async () => {
+    const service = data.services[3];
+    const result = await db.getServiceById(service.id);
+    expect(result).toBe(service);
+  });
 });
