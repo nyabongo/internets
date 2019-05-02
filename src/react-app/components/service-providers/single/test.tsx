@@ -26,9 +26,6 @@ describe('ProviderPage', () => {
     expect(renderResult.getByRole('heading').textContent).toBe(provider.name);
     expect(document.title).toBe(provider.name);
   });
-  it('should show provider details', () => {
-    expect(renderResult.getAllByTestId('provider-detail')).toHaveLength(1);
-  });
   it('should show the banner', () => {
     const banner = renderResult.getByRole('banner') as HTMLImageElement;
     expect(banner.src).toBe(provider.banner);
@@ -79,5 +76,43 @@ describe('Provider Services page', () => {
       expect(link.textContent).toBe(service.name);
       expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}`);
     });
+  });
+});
+
+describe('Service Page', () => {
+  afterAll(() => {
+    cleanup();
+  });
+
+  const service = data.services.filter(s => s.providerId === provider.id)[0];
+  let renderResult: RenderResult;
+  beforeAll(() => {
+    renderResult = render(
+      <MemoryRouter>
+        <ProviderPage providerId={provider.id} serviceId={service.id} />
+      </MemoryRouter>,
+    );
+  });
+  it('should show the provider name and service name as the title', () => {
+    expect(document.title).toBe(`${service.name} by ${provider.name}`);
+  });
+  it('should show the banner', () => {
+    const banner = renderResult.getByRole('banner') as HTMLImageElement;
+    expect(banner.src).toBe(service.banner);
+  });
+  it('should show the description as the contentinfo', () => {
+    const desc = renderResult.getByRole('contentinfo');
+    expect(desc.textContent).toBe(service.description);
+  });
+  it('should have a link to the service plans', () => {
+    const link = renderResult.getByTestId('plans-link') as HTMLAnchorElement;
+    expect(link.text).toBe('Plans');
+    expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}/plans`);
+  });
+  it('should show a link to the other services', () => {
+    const link = renderResult.getByTestId('services-link') as HTMLAnchorElement;
+    expect(link.text).toContain('Services');
+    expect(link.text).toContain(provider.name);
+    expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services`);
   });
 });
