@@ -3,8 +3,16 @@
 export interface Model {
   getServiceProviders: () => Promise<any>;
   getServiceProviderById: (id: string) => Promise<ServiceProvider>;
-  getServiceById: (id: string) => Promise<Service>;
+
+  getServices: () => Promise<Service[]>;
   getProviderServices: (id: string) => Promise<Service[]>;
+  getServiceById: (serviceId: string, providerId?: string) => Promise<Service>;
+
+  getPlans: () => Promise<Plan[]>;
+  getServicePlans: (serviceId: string, providerId?: string) => Promise<Plan[]>;
+  getProviderPlans: (providerId: string) => Promise<Plan[]>;
+  getPlanById: (planId: string, serviceId?: string, providerId?: string) => Promise<Plan>;
+
 }
 
 export interface Thing {
