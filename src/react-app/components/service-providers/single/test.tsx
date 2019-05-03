@@ -157,3 +157,39 @@ describe('Plans page', () => {
     });
   });
 });
+
+describe('Plan Page', () => {
+  afterAll(() => {
+    cleanup();
+  });
+
+  let renderResult: RenderResult;
+  beforeAll(() => {
+    renderResult = render(
+      <MemoryRouter>
+        <ProviderPage
+          providerId={plan.providerId}
+          serviceId={plan.serviceId}
+          planId={plan.id}
+        />
+      </MemoryRouter>,
+    );
+  });
+  it('should show the provider name and service name as the title', () => {
+    expect(document.title).toBe(`${plan.name} from ${provider.name}`);
+  });
+  it('should show the banner', () => {
+    const banner = renderResult.getByRole('banner') as HTMLImageElement;
+    if (plan.banner)expect(banner.src).toBe(plan.banner);
+  });
+  it('should show the description as the contentinfo', () => {
+    const desc = renderResult.getByRole('contentinfo');
+    expect(desc.textContent).toBe(plan.description);
+  });
+  it('should show a link to the other plans', () => {
+    const link = renderResult.getByTestId('plans-link') as HTMLAnchorElement;
+    expect(link.text).toContain('Plans');
+    expect(link.text).toContain(`${service.name} by ${provider.name}`);
+    expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}/plans`);
+  });
+});

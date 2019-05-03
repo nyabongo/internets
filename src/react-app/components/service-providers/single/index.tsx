@@ -39,15 +39,16 @@ interface Proptypes {
 const ListItem = (props: any) => <Li button component={Link} {...props} />;
 
 const ProviderPage = ({
-  providerId, serviceId, classes, showServices, showPlans,
+  providerId, serviceId, planId, classes, showServices, showPlans,
 }: Proptypes) => {
   const {
-    getServiceProviderById, getProviderServices, getServiceById, getServicePlans,
+    getServiceProviderById, getProviderServices, getServiceById, getServicePlans, getPlanById,
   } = useContext(DBContext);
   const [provider, setProvider] = useState();
+  const [service, setService] = useState();
+  const [plan, setPlan] = useState();
   const [services, setServices] = useState();
   const [plans, setPlans] = useState();
-  const [service, setService] = useState();
 
   useEffect(() => {
     getServiceProviderById(providerId).then((result) => {
@@ -57,11 +58,19 @@ const ProviderPage = ({
 
   useEffect(() => {
     if (serviceId) {
-      getServiceById(serviceId).then((result) => {
+      getServiceById(serviceId, providerId).then((result) => {
         setService(result);
       });
     } else setService(undefined);
   }, [providerId, serviceId, getServiceById]);
+
+  useEffect(() => {
+    if (planId) {
+      getPlanById(planId, serviceId, providerId).then((result) => {
+        setPlan(result);
+      });
+    } else setPlan(undefined);
+  }, [providerId, serviceId, planId, getPlanById]);
 
   useEffect(() => {
     if (showServices) {
@@ -90,18 +99,27 @@ const ProviderPage = ({
     if (service && provider && showPlans) {
       document.title = `Plans from ${service.name} by ${provider.name}`;
     }
-  }, [provider, service, showPlans, showServices]);
+    if (service && provider && plan) {
+      document.title = `${plan.name} from ${provider.name}`;
+    }
+  }, [provider, service, plan, showPlans, showServices]);
 
   return (
     <>
-      <Collapse in={!!service && !showPlans} mountOnEnter unmountOnExit>
+      <Fade in={!!service && !plan && !showPlans} mountOnEnter unmountOnExit>
         <ListItem data-testid="services-link" button={false} to={`/providers/${providerId}/services`}>
           <ChevronLeft />
           <ListItemText primary="Services" secondary={provider && provider.name} />
         </ListItem>
-      </Collapse>
+      </Fade>
+      <Fade in={plan && !showPlans} mountOnEnter unmountOnExit>
+        <ListItem data-testid="plans-link" button={false} to={`/providers/${providerId}/services/${serviceId}/plans`}>
+          <ChevronLeft />
+          <ListItemText primary="Plans" secondary={`${service && service.name} by ${provider && provider.name}`} />
+        </ListItem>
+      </Fade>
       <Collapse in={!showServices && !showPlans} mountOnEnter unmountOnExit>
-        {(service || provider) && <DetailCard thing={service || provider} />}
+        {(plan || service || provider) && <DetailCard thing={plan || service || provider} />}
       </Collapse>
       <Fade in={showServices || showPlans} mountOnEnter unmountOnExit>
         <Card className={classes.cards}>
@@ -126,7 +144,7 @@ const ProviderPage = ({
             <Typography variant={showServices ? 'h6' : 'subtitle1'}>Services</Typography>
           </ListItem>
         )}
-        {service && (
+        {(service && !plan) && (
           <ListItem data-testid="plans-link" button={false} to={`/providers/${providerId}/services/${serviceId}/plans`}>
             <Typography variant="subtitle1">Plans</Typography>
           </ListItem>
