@@ -2,6 +2,7 @@ import React from 'react';
 import { render, RenderResult, cleanup } from 'react-testing-library';
 import DetailCard from '.';
 import { Thing, Plan } from '../../../../db/interface';
+import currencies from './price/currencies';
 
 const thing: Thing = {
   id: 'three',
@@ -68,6 +69,13 @@ describe('DetailCard', () => {
       expect(renderResult.queryByText(`${plan.duration.value}`)).not.toBeNull();
       expect(renderResult.queryByText(`${plan.duration.unit}`)).not.toBeNull();
       expect(renderResult.queryByText('Duration')).not.toBeNull();
+    });
+    it('should show the plan price', () => {
+      const { value: price } = plan.price;
+      const { symbol, decimal_digits: decimalDigits } = currencies[plan.price.currency];
+      const formattedPrice = `${symbol} ${Number(parseFloat(`${price}`).toFixed(decimalDigits)).toLocaleString()}`;
+      expect(renderResult.queryByText(formattedPrice)).not.toBeNull();
+      expect(renderResult.queryByText('Price')).not.toBeNull();
     });
   });
 });

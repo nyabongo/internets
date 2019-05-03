@@ -3,6 +3,7 @@ import {
   Card, CardHeader, CardContent, withStyles, createStyles, Typography,
 } from '@material-ui/core';
 import { Thing, Plan } from '../../../../db/interface';
+import formatPrice from './price';
 
 const style = createStyles({
   image: {
@@ -15,8 +16,14 @@ const style = createStyles({
   vectors: {
     display: 'flex',
     justifyContent: 'space-around',
+    '&:first-child': {
+      marginLeft: '16px',
+    },
+    '&:lasst-child': {
+      marginRight: '16px',
+    },
     '&> *': {
-      margin: '16px',
+      marginBottom: '16px',
     },
   },
   vectorValue: {
@@ -27,6 +34,7 @@ const style = createStyles({
   },
   vectorContainer: {
     display: 'flex',
+    alignItems: 'baseline',
   },
   label: {
     textAlign: 'center',
@@ -49,10 +57,10 @@ const Vector = withStyles(style)(({
 }: VectorProptypes) => (
   <div>
     <div className={classes.vectorContainer}>
-      <Typography variant="h5" className={classes.vectorValue}>
+      <Typography variant="h6" className={classes.vectorValue}>
         {value}
       </Typography>
-      <Typography variant="h6" className={classes.vectorUnit}>
+      <Typography variant="subtitle1" className={classes.vectorUnit}>
         {unit}
         {value > 1 ? pluralChar : ''}
       </Typography>
@@ -87,6 +95,16 @@ function DetailCard({ classes, thing }: Proptypes) {
             pluralChar="s"
             label="Duration"
           />
+        )}
+        {thing.price && (
+          <div>
+            <Typography variant="h5" className={classes.vectorValue}>
+              {formatPrice(thing.price)}
+            </Typography>
+            <Typography variant="caption" className={classes.label}>
+              Price
+            </Typography>
+          </div>
         )}
       </div>
     </Card>
