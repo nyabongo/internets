@@ -22,6 +22,7 @@ export interface Thing {
   website?: string;
   banner?: string;
   logo?: string;
+  [index: string]: any;
 }
 
 export interface ServiceProvider extends Thing {
