@@ -8,6 +8,8 @@ const styles = createStyles({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'baseline',
   },
 });
 const ServiceProviderList = ({ classes }: {classes: any}) => {

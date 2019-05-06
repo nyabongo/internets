@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Typography, withStyles, createStyles, Avatar, Card,
+  Typography, withStyles, createStyles, Card,
 } from '@material-ui/core';
+import ErrorIcon from '@material-ui/icons/Error';
 import { Link } from 'react-router-dom';
 
 const style = createStyles({
@@ -11,14 +12,16 @@ const style = createStyles({
     alignItems: 'center',
     margin: '4px',
     textDecoration: 'none',
+    width: '160px',
   },
   img: {
     display: 'block',
-    height: '128px',
-    width: '128px',
+    height: '160px',
+    width: '160px',
     objectFit: 'contain',
+    color: '#E0E0E0',
     backgroundColor: '#fafafa',
-    borderRadius: '5%',
+    borderRadius: '0%',
   },
   title: {
     padding: '8px',
@@ -40,11 +43,13 @@ const Icon = ({
   return (
     <Card
       component={ItemLink}
-      elevation={0}
+      elevation={1}
       className={classes.root}
       role="button"
     >
-      <Avatar src={imageURL} className={classes.img} alt={title} />
+      <object data={imageURL} className={classes.img} type="image/png">
+        <ErrorIcon className={classes.img} />
+      </object>
       <Typography className={classes.title}>
         {title}
       </Typography>

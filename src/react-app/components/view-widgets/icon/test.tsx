@@ -26,17 +26,15 @@ describe('Icon', () => {
     icon = await wrapper.findByRole('button');
   });
   describe('img', () => {
-    let img: HTMLImageElement;
+    let img: HTMLObjectElement;
     beforeEach(() => {
-      const imgs = icon.getElementsByTagName('img');
+      const imgs = icon.getElementsByTagName('object');
       // eslint-disable-next-line prefer-destructuring
       img = imgs[0];
     });
-    it('should have the imageURL prop as its src', () => {
-      expect(img.src).toBe(logo);
-    });
-    it('should have title as its alt text', () => {
-      expect(img.alt).toBe(title);
+    it('should have the imageURL prop as its data atrribute and image/png as the type ', () => {
+      expect(img.data).toBe(logo);
+      expect(img.type).toBe('image/png');
     });
   });
   it('should have the title as a label', () => {
