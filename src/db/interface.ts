@@ -1,5 +1,4 @@
 
-// eslint-disable-next-line import/prefer-default-export
 export interface Model {
   getServiceProviders: () => Promise<any>;
   getServiceProviderById: (id: string) => Promise<ServiceProvider>;
@@ -43,16 +42,16 @@ export interface Plan extends Thing {
   price: {
     value: number;
     currency: string;
-    relativeMagnitude: number;
+    relativeMagnitude?: number;
   };
   volume: {
     value: number | 'Unlimited';
     unit: string;
-    relativeMagnitude: number;
+    relativeMagnitude?: number;
   };
   duration: {
     value: number;
     unit: string;
-    relativeMagnitude: number;
+    relativeMagnitude?: number;
   };
 }
