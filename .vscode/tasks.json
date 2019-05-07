@@ -5,24 +5,22 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "start",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
       "script": "lint",
+      "path": "web-client/",
       "problemMatcher": [
         "$eslint-stylish"
       ]
     },
     {
       "type": "npm",
+      "path": "web-client/",
       "script": "test:coverage",
       "problemMatcher": []
     },
     {
       "type": "npm",
       "script": "lint:fix",
+      "path": "web-client/",
       "problemMatcher": [
         "$eslint-stylish"
       ]
@@ -30,7 +28,16 @@
     {
       "type": "npm",
       "script": "storybook",
+      "path": "web-client/",
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "web-client/",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
     }
   ]
 }
