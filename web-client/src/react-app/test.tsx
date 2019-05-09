@@ -2,11 +2,13 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount, ReactWrapper } from 'enzyme';
 import App, { View } from '.';
+import { init } from '../db';
 import HomePage from './components/home-page';
 import Router from './components/page-router';
 import ProvidersList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
 
+jest.mock('../db');
 jest.mock('./components/page-router', () => () => null);
 jest.mock('./components/home-page', () => () => null);
 jest.mock('./components/service-providers/list', () => () => null);
@@ -14,8 +16,18 @@ jest.mock('./components/service-providers/single', () => () => null);
 
 describe('App', () => {
   let wrapper: ReactWrapper;
+  let defferedResolve: { (value?: {} | PromiseLike<{}> | undefined): void; (arg0: {}): void };
   beforeEach(() => {
+    const defferePromise = new Promise((resolve) => {
+      defferedResolve = resolve;
+    });
+    const mockInit = init as jest.Mock;
+    mockInit.mockReturnValue(defferePromise);
     wrapper = mount(<App />);
+    act(() => {
+      defferedResolve({});
+    });
+    wrapper.update();
   });
   it('should render without crashing', () => {
     expect(wrapper.exists()).toBeTruthy();
@@ -31,6 +43,9 @@ describe('App', () => {
     });
     it('should be rendered with a prop', () => {
       expect(router.prop('view')).toBeTruthy();
+    });
+    it('should initialise the database', () => {
+      expect(init).toHaveBeenCalled();
     });
 
     describe('View', () => {

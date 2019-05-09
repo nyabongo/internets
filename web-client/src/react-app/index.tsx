@@ -1,9 +1,12 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { init, DBProvider } from '../db';
 import HomePage from './components/home-page';
 import PageRouter from './components/page-router';
 import ServiceProviderList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
+import Database from '../db/dyna-db';
+import { Data } from '../db/dyna-db/data';
 
 interface ParamTypes {
   providerId: string;
@@ -19,6 +22,8 @@ export interface View {
 
 const App = () => {
   const [page, setPage] = useState('');
+  const [sheetId] = useState('1rvw0C2CB0cgEOjDxMDK_kcwDxzlu7Xt_yXX04Jg5pg4');
+  const [data, setData] = useState();
   const [providerId, setProviderId] = useState('');
   const [serviceId, setServiceId] = useState('');
   const [planId, setPlanId] = useState('');
@@ -36,23 +41,35 @@ const App = () => {
       }
     },
   };
+  useEffect(() => {
+    init(sheetId).then((result) => {
+      const fetchedData = result as Data;
+      setData(new Database(fetchedData));
+    }).catch(() => {
+      // likely already initialised
+    });
+  }, [sheetId]);
 
   return (
     <BrowserRouter>
-      <Fragment>
+      <DBProvider value={data}>
         <PageRouter view={view} />
-        {page === 'home' && <HomePage />}
-        {page === 'providers' && <ServiceProviderList />}
-        {page === 'provider' && (
-          <ProviderPage
-            providerId={providerId}
-            serviceId={serviceId}
-            planId={planId}
-            showServices={showServices}
-            showPlans={showPlans}
-          />
-        )}
-      </Fragment>
+        {data ? (
+          <Fragment>
+            {page === 'home' && <HomePage />}
+            {page === 'providers' && <ServiceProviderList />}
+            {page === 'provider' && (
+              <ProviderPage
+                providerId={providerId}
+                serviceId={serviceId}
+                planId={planId}
+                showServices={showServices}
+                showPlans={showPlans}
+              />
+            )}
+          </Fragment>
+        ) : 'loading'}
+      </DBProvider>
     </BrowserRouter>
   );
 };
