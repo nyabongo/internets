@@ -1,9 +1,11 @@
-import db from '.';
+import { init } from '.';
+
+jest.mock('./sheets-api', () => jest.fn().mockResolvedValue('sheets-data'));
 
 describe('db', () => {
-  describe('getProviders', () => {
+  describe('init', () => {
     it('should be a function', () => {
-      expect(db.getServiceProviders).toBeInstanceOf(Function);
+      expect(init).toBeInstanceOf(Function);
     });
   });
 });

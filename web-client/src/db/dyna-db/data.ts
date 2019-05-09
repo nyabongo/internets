@@ -1,12 +1,12 @@
 import { ServiceProvider, Service, Plan } from '../interface';
 
-export interface DB {
+export interface Data {
   serviceProviders: ServiceProvider[];
   services: Service[];
   plans: Plan[];
 }
 
-const data: DB = {
+const data: Data = {
   serviceProviders: [
     {
       id: '1',
