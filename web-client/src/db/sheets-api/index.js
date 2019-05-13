@@ -39,7 +39,10 @@ const initSheetsAPI = spreadsheetId => new Promise((resolve, reject) => {
         const data = {
           serviceProviders: providers.values.map(provider => providerParser.parse(provider)),
           services: services.values.map(service => serviceParser.parse(service)),
-          plans: plans.values.map((plan, index) => ({ id: index, ...planParser.parse(plan) })),
+          plans: plans.values.map((plan, index) => ({
+            id: index.toString(),
+            ...planParser.parse(plan),
+          })),
         };
         return resolve(data);
       })
