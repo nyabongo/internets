@@ -2,6 +2,7 @@ import React from 'react';
 import {
   render, RenderResult, cleanup, act,
 } from 'react-testing-library';
+import { MemoryRouter } from 'react-router-dom';
 import data from '../../../../../db/static-db/data';
 import PlansTable from '.';
 
@@ -12,7 +13,11 @@ describe('PlansTable', () => {
   });
   beforeAll(() => {
     act(() => {
-      renderResult = render(<PlansTable />);
+      renderResult = render(
+        <MemoryRouter>
+          <PlansTable />
+        </MemoryRouter>,
+      );
     });
   });
   it('should render', () => {
@@ -23,5 +28,15 @@ describe('PlansTable', () => {
   });
   it('should contain a row for each plan', () => {
     expect(renderResult.queryAllByRole('row')).toHaveLength(data.plans.length);
+  });
+  it('should show a link to each of the plans', () => {
+    const links = renderResult.getAllByTestId('plan-link');
+    data.plans.forEach(({
+      providerId, serviceId, id, name,
+    }, index) => {
+      const link = links[index] as HTMLAnchorElement;
+      expect(link.textContent).toContain(name);
+      expect(link.href).toBe(`${document.location.origin}/providers/${providerId}/services/${serviceId}/plans/${id}`);
+    });
   });
 });
