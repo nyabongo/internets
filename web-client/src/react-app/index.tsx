@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { createStyles, withStyles, Theme } from '@material-ui/core';
 import { init, DBProvider } from '../db';
 import HomePage from './components/home-page';
 import PageRouter from './components/page-router';
@@ -10,6 +11,17 @@ import { Data } from '../db/dyna-db/data';
 import LoadingIndicator from './components/loading-indicator';
 import PlansTable from './components/view-widgets/plans/table';
 import { Filter, FilterProvider } from '../db/filter';
+
+const styles = createStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+  },
+  nav: {
+    [theme.breakpoints.up('sm')]: {
+      width: '320px',
+    },
+  },
+}));
 
 interface ParamTypes {
   providerId: string;
@@ -23,7 +35,7 @@ export interface View {
   showPage: (pageName: string, params?: ParamTypes) => void;
 }
 
-const App = () => {
+const App = ({ classes }: {classes: any}) => {
   const [page, setPage] = useState('');
   const [sheetId] = useState('1rvw0C2CB0cgEOjDxMDK_kcwDxzlu7Xt_yXX04Jg5pg4');
   const [data, setData] = useState();
@@ -65,7 +77,8 @@ const App = () => {
         <DBProvider value={data}>
           <PageRouter view={view} />
           {data ? (
-            <Fragment>
+            <div className={classes.root}>
+              <section className={classes.nav}>
               {page === 'home' && <HomePage />}
               {page === 'providers' && <ServiceProviderList />}
               {page === 'provider' && (
@@ -79,10 +92,13 @@ const App = () => {
                   />
                 </div>
               )}
+              </section>
+              <section>
               <div style={{ padding: '4px 2px' }}>
                 {!planId && <PlansTable />}
               </div>
-            </Fragment>
+              </section>
+            </div>
           ) : (
             <div style={{ padding: '256px 0' }}>
               <LoadingIndicator />
@@ -95,4 +111,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withStyles(styles)(App);
