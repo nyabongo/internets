@@ -9,6 +9,7 @@ import Database from '../db/dyna-db';
 import { Data } from '../db/dyna-db/data';
 import LoadingIndicator from './components/loading-indicator';
 import PlansTable from './components/view-widgets/plans/table';
+import { Filter, FilterProvider } from '../db/filter';
 
 interface ParamTypes {
   providerId: string;
@@ -31,15 +32,21 @@ const App = () => {
   const [planId, setPlanId] = useState('');
   const [showServices, setShowServices] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
+  const [filter] = useState(new Filter());
   const view: View = {
     showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
       if (params) {
         setProviderId(params.providerId);
+        filter.setProvider(params.providerId || '');
         setServiceId(params.serviceId || '');
+        filter.setService(params.serviceId || '');
         setPlanId(params.planId || '');
         setShowServices(params.showServices || false);
         setShowPlans(params.showPlans || false);
+      } else {
+        filter.setProvider('');
+        filter.setService('');
       }
     },
   };
@@ -54,30 +61,32 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <DBProvider value={data}>
-        <PageRouter view={view} />
-        {data ? (
-          <Fragment>
-            {page === 'home' && <HomePage />}
-            {page === 'providers' && <ServiceProviderList />}
-            {page === 'provider' && (
-              <ProviderPage
-                providerId={providerId}
-                serviceId={serviceId}
-                planId={planId}
-                showServices={showServices}
-                showPlans={showPlans}
-              />
-            )}
-            <PlansTable />
-          </Fragment>
-        ) : (
-          <div style={{ padding: '256px 0' }}>
-            <LoadingIndicator />
-          </div>
-        )
-        }
-      </DBProvider>
+      <FilterProvider value={filter}>
+        <DBProvider value={data}>
+          <PageRouter view={view} />
+          {data ? (
+            <Fragment>
+              {page === 'home' && <HomePage />}
+              {page === 'providers' && <ServiceProviderList />}
+              {page === 'provider' && (
+                <ProviderPage
+                  providerId={providerId}
+                  serviceId={serviceId}
+                  planId={planId}
+                  showServices={showServices}
+                  showPlans={showPlans}
+                />
+              )}
+              {!planId && <PlansTable />}
+            </Fragment>
+          ) : (
+            <div style={{ padding: '256px 0' }}>
+              <LoadingIndicator />
+            </div>
+          )
+          }
+        </DBProvider>
+      </FilterProvider>
     </BrowserRouter>
   );
 };

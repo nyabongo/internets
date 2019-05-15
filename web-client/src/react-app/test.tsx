@@ -198,6 +198,9 @@ describe('App', () => {
           it('should have planId as its planId prop', () => {
             expect(providerPage.prop('planId')).toBe(planId);
           });
+          it('should not show the plans table', () => {
+            expect(wrapper.find(PlansTable).exists()).toBe(false);
+          });
         });
       });
     });
