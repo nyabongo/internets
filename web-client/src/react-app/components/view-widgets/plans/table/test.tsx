@@ -1,13 +1,27 @@
 import React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import {
+  render, RenderResult, cleanup, act,
+} from 'react-testing-library';
+import data from '../../../../../db/static-db/data';
 import PlansTable from '.';
 
 describe('PlansTable', () => {
-  let wrapper: ReactWrapper;
-  beforeEach(() => {
-    wrapper = mount(<PlansTable />);
+  let renderResult: RenderResult;
+  afterAll(() => {
+    cleanup();
   });
-  it('should render without crashing', () => {
-    expect(wrapper.exists()).toBeTruthy();
+  beforeAll(() => {
+    act(() => {
+      renderResult = render(<PlansTable />);
+    });
+  });
+  it('should render', () => {
+    expect(renderResult.container.innerHTML).not.toBeNull();
+  });
+  it('sould contain a table', () => {
+    expect(renderResult.queryAllByRole('table')).toHaveLength(1);
+  });
+  it('should contain a row for each plan', () => {
+    expect(renderResult.queryAllByRole('row')).toHaveLength(data.plans.length);
   });
 });
