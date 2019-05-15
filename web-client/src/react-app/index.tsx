@@ -69,15 +69,19 @@ const App = () => {
               {page === 'home' && <HomePage />}
               {page === 'providers' && <ServiceProviderList />}
               {page === 'provider' && (
-                <ProviderPage
-                  providerId={providerId}
-                  serviceId={serviceId}
-                  planId={planId}
-                  showServices={showServices}
-                  showPlans={showPlans}
-                />
+                <div style={{ padding: '4px 2px' }}>
+                  <ProviderPage
+                    providerId={providerId}
+                    serviceId={serviceId}
+                    planId={planId}
+                    showServices={showServices}
+                    showPlans={showPlans}
+                  />
+                </div>
               )}
-              {!planId && <PlansTable />}
+              <div style={{ padding: '4px 2px' }}>
+                {!planId && <PlansTable />}
+              </div>
             </Fragment>
           ) : (
             <div style={{ padding: '256px 0' }}>

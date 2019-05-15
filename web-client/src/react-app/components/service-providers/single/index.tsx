@@ -97,16 +97,20 @@ const ProviderPage = ({
   return (
     <>
       <Collapse in={!!service && !plan && !showPlans} mountOnEnter unmountOnExit>
-        <ListItem data-testid="services-link" button={false} to={`/providers/${providerId}/services`}>
-          <ChevronLeft />
-          <ListItemText primary="Services" secondary={provider && provider.name} />
-        </ListItem>
+        <Card style={{ marginBottom: '2px' }}>
+          <ListItem data-testid="services-link" button={false} to={`/providers/${providerId}/services`}>
+            <ChevronLeft />
+            <ListItemText primary="Services" secondary={provider && provider.name} />
+          </ListItem>
+        </Card>
       </Collapse>
       <Collapse in={plan && !showPlans} mountOnEnter unmountOnExit>
-        <ListItem data-testid="plans-link" button={false} to={`/providers/${providerId}/services/${serviceId}/plans`}>
-          <ChevronLeft />
-          <ListItemText primary="Plans" secondary={`${service && service.name} by ${provider && provider.name}`} />
-        </ListItem>
+        <Card style={{ marginBottom: '2px' }}>
+          <ListItem data-testid="plans-link" button={false} to={`/providers/${providerId}/services/${serviceId}/plans`}>
+            <ChevronLeft />
+            <ListItemText primary="Plans" secondary={`${service && service.name} by ${provider && provider.name}`} />
+          </ListItem>
+        </Card>
       </Collapse>
       <Collapse in={!showServices && !showPlans} mountOnEnter unmountOnExit>
         {(plan || service || provider) && <DetailCard thing={plan || service || provider} />}

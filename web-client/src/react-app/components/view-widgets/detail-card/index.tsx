@@ -9,6 +9,7 @@ const style = createStyles({
   image: {
     width: '100%',
     objectFit: 'contain',
+    display: 'block',
   },
   description: {
     paddingTop: '0px',
