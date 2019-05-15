@@ -7,6 +7,7 @@ import ServiceProviderList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
 import Database from '../db/dyna-db';
 import { Data } from '../db/dyna-db/data';
+import LoadingIndicator from './components/loading-indicator';
 
 interface ParamTypes {
   providerId: string;
@@ -68,7 +69,12 @@ const App = () => {
               />
             )}
           </Fragment>
-        ) : 'loading'}
+        ) : (
+          <div style={{ padding: '256px 0' }}>
+            <LoadingIndicator />
+          </div>
+        )
+        }
       </DBProvider>
     </BrowserRouter>
   );
