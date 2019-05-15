@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { mount, ReactWrapper } from 'enzyme';
 import App, { View } from '.';
 import { init } from '../db';
-import HomePage from './components/home-page';
+import HomeNav from './components/home-nav';
 import Router from './components/page-router';
 import ProvidersList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
@@ -12,7 +12,7 @@ import PlansTable from './components/view-widgets/plans/table';
 
 jest.mock('../db');
 jest.mock('./components/page-router', () => () => null);
-jest.mock('./components/home-page', () => () => null);
+jest.mock('./components/home-nav', () => () => null);
 jest.mock('./components/service-providers/list', () => () => null);
 jest.mock('./components/service-providers/single', () => () => null);
 jest.mock('./components/view-widgets/plans/table', () => () => null);
@@ -66,14 +66,14 @@ describe('App', () => {
           wrapper.update();
           expect(wrapper.find(PlansTable).exists()).toBe(true);
         });
-        describe('Home Page', () => {
+        describe('Home Nav', () => {
           it('should not be rendered  by default', () => {
-            expect(wrapper.find(HomePage).exists()).toBeFalsy();
+            expect(wrapper.find(HomeNav).exists()).toBeFalsy();
           });
           it('should be rendered when view.showPage("home") is called', () => {
             act(() => { view.showPage('home'); });
             wrapper.update();
-            expect(wrapper.find(HomePage).exists()).toBeTruthy();
+            expect(wrapper.find(HomeNav).exists()).toBeTruthy();
           });
         });
 

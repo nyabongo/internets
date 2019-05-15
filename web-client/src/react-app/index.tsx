@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createStyles, withStyles, Theme } from '@material-ui/core';
 import { init, DBProvider } from '../db';
-import HomePage from './components/home-page';
+import HomeNav from './components/home-nav';
 import PageRouter from './components/page-router';
 import ServiceProviderList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
@@ -82,7 +82,7 @@ const App = ({ classes }: {classes: any}) => {
           {data ? (
             <div className={classes.root}>
               <section className={classes.nav}>
-                {page === 'home' && <HomePage />}
+                {page === 'home' && <HomeNav />}
                 {page === 'providers' && <ServiceProviderList />}
                 {page === 'provider' && (
                   <div style={{ padding: '4px 2px' }}>
@@ -96,7 +96,7 @@ const App = ({ classes }: {classes: any}) => {
                   </div>
                 )}
               </section>
-              <section>
+              <section className={classes.content}>
                 <div style={{ padding: '4px 2px' }}>
                   {!planId && <PlansTable />}
                 </div>
