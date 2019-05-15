@@ -8,12 +8,14 @@ import Router from './components/page-router';
 import ProvidersList from './components/service-providers/list';
 import ProviderPage from './components/service-providers/single';
 import LoadingIndicator from './components/loading-indicator';
+import PlansTable from './components/view-widgets/plans/table';
 
 jest.mock('../db');
 jest.mock('./components/page-router', () => () => null);
 jest.mock('./components/home-page', () => () => null);
 jest.mock('./components/service-providers/list', () => () => null);
 jest.mock('./components/service-providers/single', () => () => null);
+jest.mock('./components/view-widgets/plans/table', () => () => null);
 
 describe('App', () => {
   let wrapper: ReactWrapper;
@@ -60,6 +62,10 @@ describe('App', () => {
           view = router.prop('view');
         });
 
+        it('should show the plans table', () => {
+          wrapper.update();
+          expect(wrapper.find(PlansTable).exists()).toBe(true);
+        });
         describe('Home Page', () => {
           it('should not be rendered  by default', () => {
             expect(wrapper.find(HomePage).exists()).toBeFalsy();

@@ -8,6 +8,7 @@ import ProviderPage from './components/service-providers/single';
 import Database from '../db/dyna-db';
 import { Data } from '../db/dyna-db/data';
 import LoadingIndicator from './components/loading-indicator';
+import PlansTable from './components/view-widgets/plans/table';
 
 interface ParamTypes {
   providerId: string;
@@ -68,6 +69,7 @@ const App = () => {
                 showPlans={showPlans}
               />
             )}
+            <PlansTable />
           </Fragment>
         ) : (
           <div style={{ padding: '256px 0' }}>
