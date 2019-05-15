@@ -109,11 +109,6 @@ describe('Service Page', () => {
     const desc = renderResult.getByRole('contentinfo');
     expect(desc.textContent).toBe(service.description);
   });
-  it('should have a link to the service plans', () => {
-    const link = renderResult.getByTestId('plans-link') as HTMLAnchorElement;
-    expect(link.text).toBe('Plans');
-    expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}/plans`);
-  });
   it('should show a link to the other services', () => {
     const link = renderResult.getByTestId('services-link') as HTMLAnchorElement;
     expect(link.text).toContain('Services');
@@ -145,16 +140,6 @@ describe('Plans page', () => {
     const link = renderResult.getByTestId('service-link') as HTMLAnchorElement;
     expect(link.text).toContain(service.name);
     expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}`);
-  });
-  it('should show a link to each of the plans', () => {
-    const plans = data.plans.filter(pln => pln.providerId === provider.id
-      && pln.serviceId === service.id);
-    const links = renderResult.getAllByTestId('plan-link');
-    plans.forEach((pln, index) => {
-      const link = links[index] as HTMLAnchorElement;
-      expect(link.textContent).toContain(pln.name);
-      expect(link.href).toBe(`${document.location.origin}/providers/${provider.id}/services/${service.id}/plans/${pln.id}`);
-    });
   });
 });
 
