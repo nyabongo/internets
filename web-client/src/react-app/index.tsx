@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createStyles, withStyles, Theme } from '@material-ui/core';
 import { init, DBProvider } from '../db';
@@ -57,6 +57,9 @@ const App = ({ classes }: {classes: any}) => {
         setShowServices(params.showServices || false);
         setShowPlans(params.showPlans || false);
       } else {
+        setProviderId('');
+        setServiceId('');
+        setPlanId('');
         filter.setProvider('');
         filter.setService('');
       }
@@ -79,24 +82,24 @@ const App = ({ classes }: {classes: any}) => {
           {data ? (
             <div className={classes.root}>
               <section className={classes.nav}>
-              {page === 'home' && <HomePage />}
-              {page === 'providers' && <ServiceProviderList />}
-              {page === 'provider' && (
-                <div style={{ padding: '4px 2px' }}>
-                  <ProviderPage
-                    providerId={providerId}
-                    serviceId={serviceId}
-                    planId={planId}
-                    showServices={showServices}
-                    showPlans={showPlans}
-                  />
-                </div>
-              )}
+                {page === 'home' && <HomePage />}
+                {page === 'providers' && <ServiceProviderList />}
+                {page === 'provider' && (
+                  <div style={{ padding: '4px 2px' }}>
+                    <ProviderPage
+                      providerId={providerId}
+                      serviceId={serviceId}
+                      planId={planId}
+                      showServices={showServices}
+                      showPlans={showPlans}
+                    />
+                  </div>
+                )}
               </section>
               <section>
-              <div style={{ padding: '4px 2px' }}>
-                {!planId && <PlansTable />}
-              </div>
+                <div style={{ padding: '4px 2px' }}>
+                  {!planId && <PlansTable />}
+                </div>
               </section>
             </div>
           ) : (
