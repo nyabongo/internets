@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createStyles, withStyles, Theme } from '@material-ui/core';
 import { init, DBProvider } from '../db';
@@ -41,6 +41,17 @@ interface ParamTypes {
 export interface View {
   showPage: (pageName: string, params?: ParamTypes) => void;
 }
+const reducer = (filterState: Filter, action: any) => {
+  const filter = new Filter();
+  if ('provider' in action) {
+    filter.setProvider(action.provider);
+  } else filter.setProvider(filterState.provider);
+  if ('service' in action) {
+    filter.setService(action.service);
+  } else filter.setService(filterState.service);
+
+  return filter;
+};
 
 const App = ({ classes }: {classes: any}) => {
   const [page, setPage] = useState('');
@@ -51,7 +62,7 @@ const App = ({ classes }: {classes: any}) => {
   const [planId, setPlanId] = useState('');
   const [showServices, setShowServices] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
-  const [filter] = useState(new Filter());
+  const [filter, dispatch] = useReducer(reducer, new Filter());
   const view: View = {
     showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
@@ -67,8 +78,8 @@ const App = ({ classes }: {classes: any}) => {
         setProviderId('');
         setServiceId('');
         setPlanId('');
-        filter.setProvider('');
-        filter.setService('');
+        // filter.setProvider('');
+        // filter.setService('');
       }
     },
   };
@@ -80,6 +91,8 @@ const App = ({ classes }: {classes: any}) => {
       // likely already initialised
     });
   }, [sheetId]);
+
+  filter.setDispatch(dispatch);
 
   return (
     <BrowserRouter>

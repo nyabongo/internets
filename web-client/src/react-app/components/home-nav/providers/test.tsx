@@ -8,6 +8,8 @@ import data from '../../../../db/static-db/data';
 import { FilterProvider, Filter } from '../../../../db/filter';
 
 const filter = new Filter();
+filter.setDispatch(jest.fn());
+
 describe('ProvidersNav', () => {
   let renderResult: RenderResult;
   beforeAll(() => {
@@ -32,8 +34,7 @@ describe('ProvidersNav', () => {
       const li = renderResult.getByTestId(`provider-${id}`);
       fireEvent.click(li);
       renderResult.getByTestId(`services-for-${id}`);
-      expect(filter.provider).toBe(id);
-      expect(filter.service).toBe('');
+      expect(filter.dispatch).toHaveBeenLastCalledWith({ provider: id, service: '' });
     });
   });
 });
@@ -64,13 +65,12 @@ describe('ServicesNav', () => {
     });
   });
   it('should set the service filter when clicked', () => {
-    services.forEach(({ id }) => {
+    services.forEach(({ providerId, id }) => {
       filter.setProvider('');
       filter.setService('');
       const li = renderResult.getByTestId(`service-${id}`);
       fireEvent.click(li);
-      expect(filter.provider).toBe(provider.id);
-      expect(filter.service).toBe(id);
+      expect(filter.dispatch).toHaveBeenLastCalledWith({ provider: providerId, service: id });
     });
   });
 });

@@ -25,8 +25,7 @@ export const ServicesNav = ({ providerId }: {providerId: string}) => {
             button
             data-testid={`service-${id}`}
             onClick={() => {
-              filter.setProvider(providerId);
-              filter.setService(id);
+              filter.dispatch({ provider: providerId, service: id });
             }}
           >
             <ListItemText inset secondary={name} />
@@ -56,8 +55,7 @@ const ProvidersNav = () => {
             data-testid={`provider-${id}`}
             onClick={() => {
               selectProvider(id);
-              filter.setProvider(id);
-              filter.setService('');
+              filter.dispatch({ provider: id, service: '' });
             }}
           >
             <ListItemAvatar>
