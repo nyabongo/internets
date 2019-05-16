@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {
-  createStyles, withStyles, TableBody, Table, TableRow, TableCell, Paper, TableHead,
+  createStyles, withStyles, TableBody, Table, TableRow, TableCell, Paper, TableHead, Divider,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { DBContext } from '../../../../../db';
 import { Plan } from '../../../../../db/interface';
 import formatPrice from '../../detail-card/price';
 import filterContext from '../../../../../db/filter';
+import HeaderDetail from './header-detail';
 import Logo from './logo';
 
 const style = createStyles({
@@ -89,6 +90,8 @@ const PlansTable = ({ classes }: { classes: any }) => {
   const filteredPlans = filterPlans(plans || []);
   return (
     <Paper>
+      <HeaderDetail />
+      <Divider />
       <Table role="table" component="div" padding="dense">
         <Header classes={classes} />
         <TableBody component="div">
