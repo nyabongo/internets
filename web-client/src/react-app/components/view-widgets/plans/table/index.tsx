@@ -7,6 +7,7 @@ import { DBContext } from '../../../../../db';
 import { Plan } from '../../../../../db/interface';
 import formatPrice from '../../detail-card/price';
 import filterContext from '../../../../../db/filter';
+import Logo from './logo';
 
 const style = createStyles({
   row: {
@@ -15,10 +16,20 @@ const style = createStyles({
   cell: {
     whiteSpace: 'pre',
   },
-  name: {},
+  name: {
+    '&> span': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+  },
   duration: {},
   volume: {},
   price: {},
+  logo: {
+    width: '32px',
+    height: '32px',
+    marginRight: '16px',
+  },
 });
 
 const RowItem = (props: any) => <TableRow component={Link} {...props} />;
@@ -35,7 +46,12 @@ const PlanRow = ({ classes, plan }: { plan: Plan; classes: any }) => {
       to={`/providers/${providerId}/services/${serviceId}/plans/${id}`}
       data-testid="plan-link"
     >
-      <Cell className={`${classes.name} ${classes.cell}`} padding="dense">{name}</Cell>
+      <Cell className={`${classes.name} ${classes.cell}`} padding="dense">
+        <span>
+          <Logo className={classes.logo} providerId={providerId} />
+          {name}
+        </span>
+      </Cell>
       <Cell className={`${classes.duration} ${classes.cell}`} padding="dense">
         {`${duration.value} ${duration.unit}`}
       </Cell>
