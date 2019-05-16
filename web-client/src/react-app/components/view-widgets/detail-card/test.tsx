@@ -61,13 +61,11 @@ describe('DetailCard', () => {
       renderResult = render(<DetailCard thing={plan} />);
     });
     it('should show the plan volume', () => {
-      expect(renderResult.queryByText(`${plan.volume.value}`)).not.toBeNull();
-      expect(renderResult.queryByText(`${plan.volume.unit}`)).not.toBeNull();
+      expect(renderResult.queryByText(`${plan.volume.value} ${plan.volume.unit}`)).not.toBeNull();
       expect(renderResult.queryByText('Volume')).not.toBeNull();
     });
     it('should show the plan duration', () => {
-      expect(renderResult.queryByText(`${plan.duration.value}`)).not.toBeNull();
-      expect(renderResult.queryByText(`${plan.duration.unit}`)).not.toBeNull();
+      expect(renderResult.queryByText(`${plan.duration.value} ${plan.duration.unit}`)).not.toBeNull();
       expect(renderResult.queryByText('Duration')).not.toBeNull();
     });
     it('should show the plan price', () => {

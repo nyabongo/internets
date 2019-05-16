@@ -1,11 +1,13 @@
 import React from 'react';
 import {
-  render, RenderResult, cleanup, act,
+  render, RenderResult, cleanup, act, fireEvent,
 } from 'react-testing-library';
 import { MemoryRouter } from 'react-router-dom';
+import sample from 'lodash/sample';
 import data from '../../../../../db/static-db/data';
 import PlansTable from '.';
 
+jest.mock('./logo', () => () => null);
 describe('PlansTable', () => {
   let renderResult: RenderResult;
   afterAll(() => {
@@ -29,14 +31,10 @@ describe('PlansTable', () => {
   it('should contain a row for each plan', () => {
     expect(renderResult.queryAllByRole('row')).toHaveLength(data.plans.length);
   });
-  it('should show a link to each of the plans', () => {
-    const links = renderResult.getAllByTestId('plan-link');
-    data.plans.forEach(({
-      providerId, serviceId, id, name,
-    }, index) => {
-      const link = links[index] as HTMLAnchorElement;
-      expect(link.textContent).toContain(name);
-      expect(link.href).toBe(`${document.location.origin}/providers/${providerId}/services/${serviceId}/plans/${id}`);
-    });
+  it('should show the plan detail when a row is clicked', () => {
+    expect(renderResult.queryAllByRole('dialog')).toHaveLength(0);
+    const planRow = sample(renderResult.queryAllByRole('row'));
+    if (planRow) fireEvent.click(planRow);
+    expect(renderResult.queryAllByRole('dialog')).toHaveLength(1);
   });
 });

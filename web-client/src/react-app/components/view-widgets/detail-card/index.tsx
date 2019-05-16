@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
-  Card, CardHeader, CardContent, withStyles, createStyles, Typography,
+  Card, CardHeader, CardContent, withStyles, createStyles,
+  Typography, TableBody, TableRow, TableCell, Table, Divider, Avatar,
 } from '@material-ui/core';
 import { Thing, Plan } from '../../../../db/interface';
 import formatPrice from './price';
+import { DBContext } from '../../../../db';
 
 const style = createStyles({
   image: {
@@ -15,12 +17,10 @@ const style = createStyles({
     paddingTop: '0px',
   },
   vectors: {
-    display: 'flex',
-    justifyContent: 'space-around',
     '&:first-child': {
       marginLeft: '16px',
     },
-    '&:lasst-child': {
+    '&:last-child': {
       marginRight: '16px',
     },
     '&> *': {
@@ -48,66 +48,93 @@ interface Proptypes {
 }
 interface VectorProptypes {
   value: string | number;
-  unit: string;
+  unit?: string;
   label?: string;
   pluralChar?: string;
   classes: any;
 }
 const Vector = withStyles(style)(({
-  value, unit, label, classes, pluralChar = '',
+  value, unit, label, pluralChar = '',
 }: VectorProptypes) => (
-  <div>
-    <div className={classes.vectorContainer}>
-      <Typography variant="h6" className={classes.vectorValue}>
-        {value}
+  <TableRow>
+    <TableCell>
+      <Typography variant="caption">
+        {label && label}
       </Typography>
-      <Typography variant="subtitle1" className={classes.vectorUnit}>
-        {unit}
+    </TableCell>
+    <TableCell>
+      <Typography variant="body1">
+        {`${value}${unit ? ` ${unit}` : ''}`}
         {value > 1 ? pluralChar : ''}
       </Typography>
-    </div>
-    <Typography variant="caption" className={classes.label}>
-      {label && label}
-    </Typography>
-  </div>
+    </TableCell>
+  </TableRow>
 ));
 
 
 function DetailCard({ classes, thing }: Proptypes) {
+  const [provider, setProvider] = useState();
+  const [service, setService] = useState();
+  const db = useContext(DBContext);
+  useEffect(() => {
+    if (thing.providerId) {
+      db.getServiceProviderById(thing.providerId).then((result) => {
+        setProvider(result);
+      });
+    } else setProvider(null);
+
+    if (thing.serviceId) {
+      db.getServiceById(thing.serviceId, thing.providerId).then((result) => {
+        setService(result);
+      });
+    } else setService(null);
+  }, [thing, db]);
+
+  const subheader = provider && `${provider.name} ${service && (` / ${service.name}`)}`;
+  const logo = thing.logo || (service && service.logo) || (provider && provider.logo);
   return (
     <Card data-testid="thing-detail" className={classes.main}>
       <img className={classes.image} role="banner" src={thing && thing.banner} alt="" />
-      <CardHeader role="heading" title={thing && thing.name} />
-      <CardContent className={classes.description} role="contentinfo">
-        {thing && thing.description}
-      </CardContent>
-      <div className={classes.vectors}>
-        {thing.volume && (
-          <Vector
-            value={thing.volume.value}
-            unit={thing.volume.unit}
-            label="Volume"
-          />
-        )}
-        {thing.duration && (
-          <Vector
-            value={thing.duration.value}
-            unit={thing.duration.unit}
-            pluralChar="s"
-            label="Duration"
-          />
-        )}
-        {thing.price && (
-          <div>
-            <Typography variant="h5" className={classes.vectorValue}>
-              {formatPrice(thing.price)}
-            </Typography>
-            <Typography variant="caption" className={classes.label}>
-              Price
-            </Typography>
-          </div>
-        )}
-      </div>
+      <CardHeader
+        avatar={logo && (<Avatar src={logo} />)}
+        role="heading"
+        title={thing && thing.name}
+        subheader={subheader}
+      />
+      <Divider />
+      {thing && thing.description && (
+        <>
+          <CardContent role="contentinfo">
+            {thing.description}
+          </CardContent>
+          <Divider />
+        </>
+      )}
+      <Table>
+        <TableBody className={classes.vectors}>
+          {thing.volume && (
+            <Vector
+              value={thing.volume.value}
+              unit={thing.volume.unit}
+              label="Volume"
+            />
+          )}
+          {thing.duration && (
+            <Vector
+              value={thing.duration.value}
+              unit={thing.duration.unit}
+              pluralChar="s"
+              label="Duration"
+            />
+          )}
+          {thing.price && (
+            <Vector
+              value={formatPrice(thing.price)}
+              label="Price"
+            />
+          )}
+        </TableBody>
+      </Table>
     </Card>
   );
 }
