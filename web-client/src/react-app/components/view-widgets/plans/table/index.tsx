@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {
-  createStyles, withStyles, TableBody, Table, TableRow, TableCell, Paper,
+  createStyles, withStyles, TableBody, Table, TableRow, TableCell, Paper, TableHead,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { DBContext } from '../../../../../db';
@@ -49,6 +49,17 @@ const PlanRow = ({ classes, plan }: { plan: Plan; classes: any }) => {
   );
 };
 
+const Header = ({ classes }: { classes: any }) => (
+  <TableHead>
+    <TableRow>
+      <Cell className={`${classes.name} ${classes.cell}`}>Name</Cell>
+      <Cell className={`${classes.duration} ${classes.cell}`}>Duration</Cell>
+      <Cell className={`${classes.volume} ${classes.cell}`}>Volume</Cell>
+      <Cell className={`${classes.price} ${classes.cell}`}>Price</Cell>
+    </TableRow>
+  </TableHead>
+);
+
 const PlansTable = ({ classes }: { classes: any }) => {
   const { getPlans } = useContext(DBContext);
   const [plans, setPlans] = useState();
@@ -63,7 +74,7 @@ const PlansTable = ({ classes }: { classes: any }) => {
   return (
     <Paper>
       <Table role="table" component="div" padding="dense">
-
+        <Header classes={classes} />
         <TableBody component="div">
           {(filteredPlans || []).map((plan: Plan) => {
             const key = `${plan.providerId}/${plan.serviceId}/${plan.id}`;
