@@ -30,17 +30,14 @@ const HeaderDetail = () => {
     } else { setService(null); }
   }, [serviceId, getServiceById]);
 
-  const main = service || provider;
-  if (!main) {
-    return null;
-  }
+  const main = service || provider || { name: 'Plans' };
 
   return (
     <ExpansionPanel elevation={0}>
       <ExpansionPanelSummary style={{ padding: 0, margin: 0 }} expandIcon={<ExpandMoreIcon />}>
         <CardHeader
           style={{ padding: '0 16px' }}
-          avatar={provider && <Avatar src={provider.logo} />}
+          avatar={provider && <Avatar src={main.logo || provider.logo} />}
           title={main.name}
           subheader={service && provider && provider.name}
         />
