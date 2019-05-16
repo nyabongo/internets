@@ -37,6 +37,15 @@ describe('ProvidersNav', () => {
       expect(filter.dispatch).toHaveBeenLastCalledWith({ provider: id, service: '' });
     });
   });
+  it('should render a service for each provider  and unset the filter if it is already set', () => {
+    data.serviceProviders.forEach(({ id }) => {
+      const li = renderResult.getByTestId(`provider-${id}`);
+      filter.setProvider(id);
+      fireEvent.click(li);
+      renderResult.getByTestId(`services-for-${id}`);
+      expect(filter.dispatch).toHaveBeenLastCalledWith({ provider: '', service: '' });
+    });
+  });
 });
 
 describe('ServicesNav', () => {
@@ -71,6 +80,15 @@ describe('ServicesNav', () => {
       const li = renderResult.getByTestId(`service-${id}`);
       fireEvent.click(li);
       expect(filter.dispatch).toHaveBeenLastCalledWith({ provider: providerId, service: id });
+    });
+  });
+  it('should unset the service filter when clicked and it is already set', () => {
+    services.forEach(({ providerId, id }) => {
+      filter.setProvider(providerId);
+      filter.setService(id);
+      const li = renderResult.getByTestId(`service-${id}`);
+      fireEvent.click(li);
+      expect(filter.dispatch).toHaveBeenLastCalledWith({ service: '' });
     });
   });
 });

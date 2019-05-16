@@ -22,10 +22,14 @@ export const ServicesNav = ({ providerId }: {providerId: string}) => {
       {(services || []).map(({ name, id }: Service) => (
         <Fragment key={`${providerId}/${id}`}>
           <ListItem
-            button
+            selected={filter.service === id}
             data-testid={`service-${id}`}
             onClick={() => {
-              filter.dispatch({ provider: providerId, service: id });
+              if (filter.service === id) {
+                filter.dispatch({ service: '' });
+              } else {
+                filter.dispatch({ provider: providerId, service: id });
+              }
             }}
           >
             <ListItemText inset secondary={name} />
@@ -53,11 +57,16 @@ const ProvidersNav = () => {
       {(providers || []).map(({ logo, name, id }: ServiceProvider) => (
         <Fragment key={id}>
           <ListItem
-            button
+            selected={filter.provider === id}
             data-testid={`provider-${id}`}
             onClick={() => {
-              selectProvider(id);
-              filter.dispatch({ provider: id, service: '' });
+              if (filter.provider === id) {
+                selectProvider('');
+                filter.dispatch({ provider: '', service: '' });
+              } else {
+                selectProvider(id);
+                filter.dispatch({ provider: id, service: '' });
+              }
             }}
           >
             <ListItemAvatar>
