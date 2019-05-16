@@ -15,11 +15,18 @@ import { Filter, FilterProvider } from '../db/filter';
 const styles = createStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexWrap: 'wrap',
   },
   nav: {
+    flexGrow: 1,
     [theme.breakpoints.up('sm')]: {
-      width: '320px',
+      maxWidth: '320px',
     },
+    padding: '4px 2px',
+  },
+  content: {
+    flexGrow: 1,
+    padding: '4px 2px',
   },
 }));
 
@@ -85,21 +92,17 @@ const App = ({ classes }: {classes: any}) => {
                 {page === 'home' && <HomeNav />}
                 {page === 'providers' && <ServiceProviderList />}
                 {page === 'provider' && (
-                  <div style={{ padding: '4px 2px' }}>
-                    <ProviderPage
-                      providerId={providerId}
-                      serviceId={serviceId}
-                      planId={planId}
-                      showServices={showServices}
-                      showPlans={showPlans}
-                    />
-                  </div>
+                  <ProviderPage
+                    providerId={providerId}
+                    serviceId={serviceId}
+                    planId={planId}
+                    showServices={showServices}
+                    showPlans={showPlans}
+                  />
                 )}
               </section>
               <section className={classes.content}>
-                <div style={{ padding: '4px 2px' }}>
-                  {!planId && <PlansTable />}
-                </div>
+                {!planId && <PlansTable />}
               </section>
             </div>
           ) : (
