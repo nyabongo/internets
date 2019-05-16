@@ -1,11 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-import { createContext } from 'react';
+import { createContext, Dispatch } from 'react';
 import { Plan } from '../interface';
 
 export class Filter {
   private _provider = '';
 
   private _service = '';
+
+  private _dispatch: Dispatch<any> = () => { };
 
   public setProvider = (providerId: string) => {
     this._provider = providerId;
@@ -23,7 +25,16 @@ export class Filter {
     return this._service;
   }
 
-  public filterPlans =(plans: Plan[]): Plan[] => plans
+  public setDispatch = (func: Dispatch<any>) => {
+    this._dispatch = func;
+  }
+
+  public get dispatch() {
+    return this._dispatch;
+  }
+
+
+  public filterPlans = (plans: Plan[]): Plan[] => plans
     .filter(plan => !this._provider || plan.providerId === this._provider)
     .filter(plan => !this._service || plan.serviceId === this._service)
 }
