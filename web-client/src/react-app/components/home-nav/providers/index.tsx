@@ -2,7 +2,7 @@ import React, {
   useContext, useState, Fragment, useEffect,
 } from 'react';
 import {
-  ListItem, ListItemAvatar, Avatar, ListItemText, Card, Divider, Collapse, List,
+  ListItem, ListItemAvatar, Avatar, ListItemText, Card, Divider, Collapse, List, CardHeader,
 } from '@material-ui/core';
 import { DBContext } from '../../../../db';
 import { ServiceProvider, Service } from '../../../../db/interface';
@@ -48,6 +48,8 @@ const ProvidersNav = () => {
   });
   return (
     <Card>
+      <CardHeader title="ISPs and Services" />
+      <Divider />
       {(providers || []).map(({ logo, name, id }: ServiceProvider) => (
         <Fragment key={id}>
           <ListItem
