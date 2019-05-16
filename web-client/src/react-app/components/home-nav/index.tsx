@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
-import ISPPreview from '../service-providers/isp-preview';
+import Providers from './providers';
 
 const HomePage = () => (
   <Fragment>
-    <ISPPreview />
-    Home Page placeHolder
+    <Providers />
   </Fragment>
 );
 

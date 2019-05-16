@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import ISPPreview from '../service-providers/isp-preview';
+import Providers from './providers';
 import HomePage from '.';
 
-jest.mock('../service-providers/isp-preview', () => () => null);
+jest.mock('./providers', () => () => null);
 
 describe('HomePage', () => {
   let wrapper: ReactWrapper;
@@ -13,13 +13,7 @@ describe('HomePage', () => {
   it('should render without crashing', () => {
     expect(wrapper.exists()).toBeTruthy();
   });
-  describe('ISPPPreview', () => {
-    let ispPreview: ReactWrapper<{}, never, React.Component<{}, {}>>;
-    beforeEach(() => {
-      ispPreview = wrapper.find(ISPPreview);
-    });
-    it('should be rendered', () => {
-      expect(ispPreview.exists()).toBeTruthy();
-    });
+  it('should render providers', () => {
+    expect(wrapper.find(Providers)).toBeTruthy();
   });
 });
