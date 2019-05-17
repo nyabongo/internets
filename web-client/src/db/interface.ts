@@ -42,16 +42,16 @@ export interface Plan extends Thing {
   price: {
     value: number;
     currency: string;
-    relativeMagnitude?: number;
+    magnitude?: number;
   };
   volume: {
     value: number | 'Unlimited';
     unit: string;
-    relativeMagnitude?: number;
+    magnitude?: number;
   };
   duration: {
     value: number;
     unit: string;
-    relativeMagnitude?: number;
+    magnitude?: number;
   };
 }

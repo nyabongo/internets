@@ -91,17 +91,17 @@ const data: Data = {
       price: {
         value: 466.00,
         currency: 'MDL',
-        relativeMagnitude: 466.00,
+        magnitude: 466.00,
       },
       volume: {
         value: 784.91,
         unit: 'MB',
-        relativeMagnitude: 784.91,
+        magnitude: 784.91,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -113,17 +113,17 @@ const data: Data = {
       price: {
         value: 583.00,
         currency: 'HKD',
-        relativeMagnitude: 583.00,
+        magnitude: 583.00,
       },
       volume: {
         value: 720.73,
         unit: 'MB',
-        relativeMagnitude: 720.73,
+        magnitude: 720.73,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -135,17 +135,17 @@ const data: Data = {
       price: {
         value: 772.00,
         currency: 'LBP',
-        relativeMagnitude: 772.00,
+        magnitude: 772.00,
       },
       volume: {
         value: 433.67,
         unit: 'MB',
-        relativeMagnitude: 433.67,
+        magnitude: 433.67,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -157,17 +157,17 @@ const data: Data = {
       price: {
         value: 263.00,
         currency: 'AMD',
-        relativeMagnitude: 263.00,
+        magnitude: 263.00,
       },
       volume: {
         value: 221.66,
         unit: 'MB',
-        relativeMagnitude: 221.66,
+        magnitude: 221.66,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -179,17 +179,17 @@ const data: Data = {
       price: {
         value: 740.00,
         currency: 'BIF',
-        relativeMagnitude: 740.00,
+        magnitude: 740.00,
       },
       volume: {
         value: 74.10,
         unit: 'MB',
-        relativeMagnitude: 74.10,
+        magnitude: 74.10,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -201,17 +201,17 @@ const data: Data = {
       price: {
         value: 123.00,
         currency: 'LRD',
-        relativeMagnitude: 123.00,
+        magnitude: 123.00,
       },
       volume: {
         value: 222.12,
         unit: 'MB',
-        relativeMagnitude: 222.12,
+        magnitude: 222.12,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -223,17 +223,17 @@ const data: Data = {
       price: {
         value: 607.00,
         currency: 'INR',
-        relativeMagnitude: 607.00,
+        magnitude: 607.00,
       },
       volume: {
         value: 984.58,
         unit: 'MB',
-        relativeMagnitude: 984.58,
+        magnitude: 984.58,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -245,17 +245,17 @@ const data: Data = {
       price: {
         value: 282.00,
         currency: 'PHP',
-        relativeMagnitude: 282.00,
+        magnitude: 282.00,
       },
       volume: {
         value: 861.68,
         unit: 'MB',
-        relativeMagnitude: 861.68,
+        magnitude: 861.68,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -267,17 +267,17 @@ const data: Data = {
       price: {
         value: 918.00,
         currency: 'WST',
-        relativeMagnitude: 918.00,
+        magnitude: 918.00,
       },
       volume: {
         value: 451.35,
         unit: 'MB',
-        relativeMagnitude: 451.35,
+        magnitude: 451.35,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -289,17 +289,17 @@ const data: Data = {
       price: {
         value: 794.00,
         currency: 'DJF',
-        relativeMagnitude: 794.00,
+        magnitude: 794.00,
       },
       volume: {
         value: 712.14,
         unit: 'MB',
-        relativeMagnitude: 712.14,
+        magnitude: 712.14,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -311,17 +311,17 @@ const data: Data = {
       price: {
         value: 228.00,
         currency: 'FKP',
-        relativeMagnitude: 228.00,
+        magnitude: 228.00,
       },
       volume: {
         value: 7.42,
         unit: 'MB',
-        relativeMagnitude: 7.42,
+        magnitude: 7.42,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -333,17 +333,17 @@ const data: Data = {
       price: {
         value: 800.00,
         currency: 'XFU',
-        relativeMagnitude: 800.00,
+        magnitude: 800.00,
       },
       volume: {
         value: 531.27,
         unit: 'MB',
-        relativeMagnitude: 531.27,
+        magnitude: 531.27,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -355,17 +355,17 @@ const data: Data = {
       price: {
         value: 135.00,
         currency: 'TRY',
-        relativeMagnitude: 135.00,
+        magnitude: 135.00,
       },
       volume: {
         value: 834.73,
         unit: 'MB',
-        relativeMagnitude: 834.73,
+        magnitude: 834.73,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -377,17 +377,17 @@ const data: Data = {
       price: {
         value: 450.00,
         currency: 'ZWL',
-        relativeMagnitude: 450.00,
+        magnitude: 450.00,
       },
       volume: {
         value: 406.28,
         unit: 'MB',
-        relativeMagnitude: 406.28,
+        magnitude: 406.28,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -399,17 +399,17 @@ const data: Data = {
       price: {
         value: 605.00,
         currency: 'PGK',
-        relativeMagnitude: 605.00,
+        magnitude: 605.00,
       },
       volume: {
         value: 504.34,
         unit: 'MB',
-        relativeMagnitude: 504.34,
+        magnitude: 504.34,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -421,17 +421,17 @@ const data: Data = {
       price: {
         value: 165.00,
         currency: 'GYD',
-        relativeMagnitude: 165.00,
+        magnitude: 165.00,
       },
       volume: {
         value: 258.37,
         unit: 'MB',
-        relativeMagnitude: 258.37,
+        magnitude: 258.37,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -443,17 +443,17 @@ const data: Data = {
       price: {
         value: 993.00,
         currency: 'MNT',
-        relativeMagnitude: 993.00,
+        magnitude: 993.00,
       },
       volume: {
         value: 199.47,
         unit: 'MB',
-        relativeMagnitude: 199.47,
+        magnitude: 199.47,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -465,17 +465,17 @@ const data: Data = {
       price: {
         value: 496.00,
         currency: 'BSD',
-        relativeMagnitude: 496.00,
+        magnitude: 496.00,
       },
       volume: {
         value: 114.14,
         unit: 'MB',
-        relativeMagnitude: 114.14,
+        magnitude: 114.14,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -487,17 +487,17 @@ const data: Data = {
       price: {
         value: 458.00,
         currency: 'GYD',
-        relativeMagnitude: 458.00,
+        magnitude: 458.00,
       },
       volume: {
         value: 740.03,
         unit: 'MB',
-        relativeMagnitude: 740.03,
+        magnitude: 740.03,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -509,17 +509,17 @@ const data: Data = {
       price: {
         value: 426.00,
         currency: 'XPF',
-        relativeMagnitude: 426.00,
+        magnitude: 426.00,
       },
       volume: {
         value: 69.94,
         unit: 'MB',
-        relativeMagnitude: 69.94,
+        magnitude: 69.94,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -531,17 +531,17 @@ const data: Data = {
       price: {
         value: 290.00,
         currency: 'OMR',
-        relativeMagnitude: 290.00,
+        magnitude: 290.00,
       },
       volume: {
         value: 743.99,
         unit: 'MB',
-        relativeMagnitude: 743.99,
+        magnitude: 743.99,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -553,17 +553,17 @@ const data: Data = {
       price: {
         value: 338.00,
         currency: 'XAF',
-        relativeMagnitude: 338.00,
+        magnitude: 338.00,
       },
       volume: {
         value: 134.33,
         unit: 'MB',
-        relativeMagnitude: 134.33,
+        magnitude: 134.33,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -575,17 +575,17 @@ const data: Data = {
       price: {
         value: 654.00,
         currency: 'JMD',
-        relativeMagnitude: 654.00,
+        magnitude: 654.00,
       },
       volume: {
         value: 375.23,
         unit: 'MB',
-        relativeMagnitude: 375.23,
+        magnitude: 375.23,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -597,17 +597,17 @@ const data: Data = {
       price: {
         value: 813.00,
         currency: 'TJS',
-        relativeMagnitude: 813.00,
+        magnitude: 813.00,
       },
       volume: {
         value: 365.69,
         unit: 'MB',
-        relativeMagnitude: 365.69,
+        magnitude: 365.69,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -619,17 +619,17 @@ const data: Data = {
       price: {
         value: 376.00,
         currency: 'CVE',
-        relativeMagnitude: 376.00,
+        magnitude: 376.00,
       },
       volume: {
         value: 132.52,
         unit: 'MB',
-        relativeMagnitude: 132.52,
+        magnitude: 132.52,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -641,17 +641,17 @@ const data: Data = {
       price: {
         value: 303.00,
         currency: 'SLL',
-        relativeMagnitude: 303.00,
+        magnitude: 303.00,
       },
       volume: {
         value: 947.42,
         unit: 'MB',
-        relativeMagnitude: 947.42,
+        magnitude: 947.42,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -663,17 +663,17 @@ const data: Data = {
       price: {
         value: 689.00,
         currency: 'NPR',
-        relativeMagnitude: 689.00,
+        magnitude: 689.00,
       },
       volume: {
         value: 311.99,
         unit: 'MB',
-        relativeMagnitude: 311.99,
+        magnitude: 311.99,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -685,17 +685,17 @@ const data: Data = {
       price: {
         value: 436.00,
         currency: 'DOP',
-        relativeMagnitude: 436.00,
+        magnitude: 436.00,
       },
       volume: {
         value: 93.95,
         unit: 'MB',
-        relativeMagnitude: 93.95,
+        magnitude: 93.95,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -707,17 +707,17 @@ const data: Data = {
       price: {
         value: 933.00,
         currency: 'AUD',
-        relativeMagnitude: 933.00,
+        magnitude: 933.00,
       },
       volume: {
         value: 301.00,
         unit: 'MB',
-        relativeMagnitude: 301.00,
+        magnitude: 301.00,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -729,17 +729,17 @@ const data: Data = {
       price: {
         value: 333.00,
         currency: 'AMD',
-        relativeMagnitude: 333.00,
+        magnitude: 333.00,
       },
       volume: {
         value: 369.57,
         unit: 'MB',
-        relativeMagnitude: 369.57,
+        magnitude: 369.57,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -751,17 +751,17 @@ const data: Data = {
       price: {
         value: 970.00,
         currency: 'AFN',
-        relativeMagnitude: 970.00,
+        magnitude: 970.00,
       },
       volume: {
         value: 463.73,
         unit: 'MB',
-        relativeMagnitude: 463.73,
+        magnitude: 463.73,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -773,17 +773,17 @@ const data: Data = {
       price: {
         value: 588.00,
         currency: 'JOD',
-        relativeMagnitude: 588.00,
+        magnitude: 588.00,
       },
       volume: {
         value: 217.51,
         unit: 'MB',
-        relativeMagnitude: 217.51,
+        magnitude: 217.51,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -795,17 +795,17 @@ const data: Data = {
       price: {
         value: 841.00,
         currency: 'AMD',
-        relativeMagnitude: 841.00,
+        magnitude: 841.00,
       },
       volume: {
         value: 680.84,
         unit: 'MB',
-        relativeMagnitude: 680.84,
+        magnitude: 680.84,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -817,17 +817,17 @@ const data: Data = {
       price: {
         value: 313.00,
         currency: 'INR BTN',
-        relativeMagnitude: 313.00,
+        magnitude: 313.00,
       },
       volume: {
         value: 60.11,
         unit: 'MB',
-        relativeMagnitude: 60.11,
+        magnitude: 60.11,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -839,17 +839,17 @@ const data: Data = {
       price: {
         value: 860.00,
         currency: 'XBC',
-        relativeMagnitude: 860.00,
+        magnitude: 860.00,
       },
       volume: {
         value: 707.74,
         unit: 'MB',
-        relativeMagnitude: 707.74,
+        magnitude: 707.74,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
     {
@@ -861,17 +861,17 @@ const data: Data = {
       price: {
         value: 151.00,
         currency: 'HRK',
-        relativeMagnitude: 151.00,
+        magnitude: 151.00,
       },
       volume: {
         value: 870.89,
         unit: 'MB',
-        relativeMagnitude: 870.89,
+        magnitude: 870.89,
       },
       duration: {
         value: 1,
         unit: 'month',
-        relativeMagnitude: 1,
+        magnitude: 1,
       },
     },
   ],
