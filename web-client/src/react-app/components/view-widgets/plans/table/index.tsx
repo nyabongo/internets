@@ -24,8 +24,16 @@ const style = createStyles({
       alignItems: 'center',
     },
   },
-  duration: {},
-  volume: {},
+  duration: {
+    '@media (max-width: 640px)': {
+      display: 'none',
+    },
+  },
+  volume: {
+    '@media (max-width: 480px)': {
+      display: 'none',
+    },
+  },
   price: {},
   logo: {
     width: '32px',

@@ -29,6 +29,16 @@ const styles = createStyles((theme: Theme) => ({
     right: 'auto',
   },
   nav: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    [theme.breakpoints.up('sm')]: {
+      width: '0',
+    },
+    // padding: '4px 2px',
+  },
+  openNav: {
     [theme.breakpoints.up('sm')]: {
       width: '320px',
     },
@@ -44,14 +54,19 @@ const styles = createStyles((theme: Theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: '-320px',
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '-320px',
+    },
+    // marginLeft: '-320px',
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
+    [theme.breakpoints.up('md')]: {
+      marginLeft: 0,
+    },
   },
 }));
 
@@ -119,7 +134,7 @@ const App = ({ classes }: {classes: any}) => {
               <CssBaseline />
               <Drawer
                 variant="persistent"
-                className={`${classes.nav} ${openDrawer ? classes.contentShift : ''}`}
+                className={`${classes.nav} ${openDrawer ? `${classes.contentShift} ${classes.openNav}` : ''}`}
                 classes={{ paper: classes.drawerPaper }}
                 open={openDrawer}
               >
