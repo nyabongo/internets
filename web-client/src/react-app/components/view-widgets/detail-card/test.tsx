@@ -22,17 +22,17 @@ const plan: Plan = {
   price: {
     value: 466.00,
     currency: 'MDL',
-    relativeMagnitude: 466.00,
+    magnitude: 466.00,
   },
   volume: {
     value: 784.91,
     unit: 'MB',
-    relativeMagnitude: 784.91,
+    magnitude: 784.91,
   },
   duration: {
     value: 1,
     unit: 'month',
-    relativeMagnitude: 1,
+    magnitude: 1,
   },
 };
 
