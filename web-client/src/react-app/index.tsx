@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { createStyles, withStyles, Theme } from '@material-ui/core';
+import {
+  createStyles, withStyles, Theme, Drawer, CssBaseline,
+  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { init, DBProvider } from '../db';
 import HomeNav from './components/home-nav';
 import PageRouter from './components/page-router';
@@ -15,18 +20,38 @@ import { Filter, FilterProvider, reducer } from '../db/filter';
 const styles = createStyles((theme: Theme) => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap',
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    right: 'auto',
   },
   nav: {
-    flexGrow: 1,
     [theme.breakpoints.up('sm')]: {
-      maxWidth: '320px',
+      width: '320px',
     },
     padding: '4px 2px',
   },
+  drawerPaper: {
+    width: '320px',
+  },
   content: {
+    paddingTop: '64px',
     flexGrow: 1,
-    padding: '4px 2px',
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: '-320px',
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
   },
 }));
 
@@ -42,6 +67,7 @@ export interface View {
   showPage: (pageName: string, params?: ParamTypes) => void;
 }
 
+
 const App = ({ classes }: {classes: any}) => {
   const [page, setPage] = useState('');
   const [sheetId] = useState('1rvw0C2CB0cgEOjDxMDK_kcwDxzlu7Xt_yXX04Jg5pg4');
@@ -52,6 +78,8 @@ const App = ({ classes }: {classes: any}) => {
   const [showServices, setShowServices] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
   const [filter, dispatch] = useReducer(reducer, new Filter());
+  const [openDrawer, setDrawer] = useState(true);
+
   const view: View = {
     showPage: (pageName: string, params?: ParamTypes) => {
       setPage(pageName);
@@ -67,8 +95,6 @@ const App = ({ classes }: {classes: any}) => {
         setProviderId('');
         setServiceId('');
         setPlanId('');
-        // filter.setProvider('');
-        // filter.setService('');
       }
     },
   };
@@ -90,7 +116,17 @@ const App = ({ classes }: {classes: any}) => {
           <PageRouter view={view} />
           {data ? (
             <div className={classes.root}>
-              <section className={classes.nav}>
+              <CssBaseline />
+              <Drawer
+                variant="persistent"
+                className={`${classes.nav} ${openDrawer ? classes.contentShift : ''}`}
+                classes={{ paper: classes.drawerPaper }}
+                open={openDrawer}
+              >
+                <ListItem button divider onClick={() => { setDrawer(false); }}>
+                  <ListItemText primary=" " />
+                  <ChevronLeftIcon />
+                </ListItem>
                 {page === 'home' && <HomeNav />}
                 {page === 'providers' && <ServiceProviderList />}
                 {page === 'provider' && (
@@ -102,10 +138,26 @@ const App = ({ classes }: {classes: any}) => {
                     showPlans={showPlans}
                   />
                 )}
-              </section>
-              <section className={classes.content}>
+              </Drawer>
+              <main className={`${classes.content} ${openDrawer ? classes.contentShift : ''}`}>
+                <AppBar className={classes.appBar}>
+                  <Toolbar>
+                    {!openDrawer && (
+                      <IconButton
+                        color="inherit"
+                        aria-label="Open drawer"
+                        onClick={() => { setDrawer(true); }}
+                      >
+                        <MenuIcon />
+                      </IconButton>
+                    )}
+                    <Typography variant="h6" color="inherit" noWrap>
+            Internets
+                    </Typography>
+                  </Toolbar>
+                </AppBar>
                 {!planId && <PlansTable />}
-              </section>
+              </main>
             </div>
           ) : (
             <div style={{ padding: '256px 0' }}>

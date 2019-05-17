@@ -22,6 +22,7 @@ export const ServicesNav = ({ providerId }: {providerId: string}) => {
       {(services || []).map(({ name, id }: Service) => (
         <Fragment key={`${providerId}/${id}`}>
           <ListItem
+            button
             selected={filter.service === id}
             data-testid={`service-${id}`}
             onClick={() => {
@@ -57,6 +58,7 @@ const ProvidersNav = () => {
       {(providers || []).map(({ logo, name, id }: ServiceProvider) => (
         <Fragment key={id}>
           <ListItem
+            button
             selected={filter.provider === id}
             data-testid={`provider-${id}`}
             onClick={() => {
