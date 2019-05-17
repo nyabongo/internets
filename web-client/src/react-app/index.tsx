@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import {
   createStyles, withStyles, Theme, Drawer, CssBaseline,
-  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText,
+  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText, withWidth,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -59,6 +59,13 @@ const styles = createStyles((theme: Theme) => ({
     },
     // marginLeft: '-320px',
   },
+  contentWithClosedNav: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -83,7 +90,7 @@ export interface View {
 }
 
 
-const App = ({ classes }: {classes: any}) => {
+const App = ({ classes, width }: { classes: any; width: string }) => {
   const [page, setPage] = useState('');
   const [sheetId] = useState('1rvw0C2CB0cgEOjDxMDK_kcwDxzlu7Xt_yXX04Jg5pg4');
   const [data, setData] = useState();
@@ -123,7 +130,7 @@ const App = ({ classes }: {classes: any}) => {
   }, [sheetId]);
 
   filter.setDispatch(dispatch);
-
+  const isTabletOrSmaller = ['xs', 'sm'].includes(width);
   return (
     <BrowserRouter>
       <FilterProvider value={filter}>
@@ -133,10 +140,11 @@ const App = ({ classes }: {classes: any}) => {
             <div className={classes.root}>
               <CssBaseline />
               <Drawer
-                variant="persistent"
+                variant={isTabletOrSmaller ? 'temporary' : 'persistent'}
                 className={`${classes.nav} ${openDrawer ? `${classes.contentShift} ${classes.openNav}` : ''}`}
                 classes={{ paper: classes.drawerPaper }}
                 open={openDrawer}
+                onClose={() => { setDrawer(false); }}
               >
                 <ListItem button divider onClick={() => { setDrawer(false); }}>
                   <ListItemText primary=" " />
@@ -154,7 +162,7 @@ const App = ({ classes }: {classes: any}) => {
                   />
                 )}
               </Drawer>
-              <main className={`${classes.content} ${openDrawer ? classes.contentShift : ''}`}>
+              <main className={`${classes.content} ${openDrawer ? classes.contentShift : classes.contentWithClosedNav}`}>
                 <AppBar className={classes.appBar}>
                   <Toolbar>
                     {!openDrawer && (
@@ -167,7 +175,7 @@ const App = ({ classes }: {classes: any}) => {
                       </IconButton>
                     )}
                     <Typography variant="h6" color="inherit" noWrap>
-            Internets
+                      Internets
                     </Typography>
                   </Toolbar>
                 </AppBar>
@@ -186,4 +194,4 @@ const App = ({ classes }: {classes: any}) => {
   );
 };
 
-export default withStyles(styles)(App);
+export default withWidth()(withStyles(styles)(App));
