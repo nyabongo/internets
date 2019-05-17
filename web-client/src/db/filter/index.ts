@@ -1,11 +1,29 @@
 /* eslint-disable no-underscore-dangle */
 import { createContext, Dispatch } from 'react';
+import sortBy from 'lodash/sortBy';
 import { Plan } from '../interface';
 
+type OrderBy = '' | 'name' | 'price' | 'volume' | 'duration';
+
 export class Filter {
+  private _predicates = {
+    name: 'name',
+    price: (p: Plan) => p.price.value,
+    volume: (p: Plan) => p.volume.magnitude,
+    duration: (p: Plan) => p.duration.magnitude,
+  }
+
   private _provider = '';
 
   private _service = '';
+
+  private _orderBy: OrderBy = '';
+
+  private _reverse = false;
+
+  public constructor(orderBy?: OrderBy) {
+    this._orderBy = orderBy || '';
+  }
 
   private _dispatch: Dispatch<any> = () => { };
 
@@ -33,12 +51,43 @@ export class Filter {
     return this._dispatch;
   }
 
+  public get orderBy() {
+    return this._orderBy;
+  }
 
-  public filterPlans = (plans: Plan[]): Plan[] => plans
-    .filter(plan => !this._provider || plan.providerId === this._provider)
+
+  public set orderBy(val: any) {
+    if (this._orderBy === val) {
+      if (this._reverse) {
+        this._reverse = false;
+        this._orderBy = '';
+      } else { this._reverse = true; }
+    } else { this._orderBy = val; }
+  }
+
+  public get reverse() {
+    return this._reverse;
+  }
+
+  public set reverse(val: boolean) {
+    this._reverse = val;
+  }
+
+  public filterPlans = (plans: Plan[]): Plan[] => {
+    const filteredPlans = plans
+      .filter(plan => !this._provider || plan.providerId === this._provider)
+      .filter(plan => !this._service || plan.serviceId === this._service);
+    const orderedPlans = this._orderBy
+      ? sortBy(filteredPlans, this._predicates[this._orderBy])
+      : filteredPlans;
+    return this._reverse ? orderedPlans.reverse() : orderedPlans;
+  }
+}
 
 export const reducer = (filterState: Filter, action: any) => {
-    .filter(plan => !this._service || plan.serviceId === this._service)
+  const filter = new Filter(filterState.orderBy);
+  filter.reverse = filterState.reverse;
+
   if ('provider' in action) {
     filter.setProvider(action.provider);
   } else filter.setProvider(filterState.provider);
@@ -46,7 +95,10 @@ export const reducer = (filterState: Filter, action: any) => {
   if ('service' in action) {
     filter.setService(action.service);
   } else filter.setService(filterState.service);
-}
+
+  if ('orderBy' in action) {
+    filter.orderBy = action.orderBy;
+  }
 
   return filter;
 };
