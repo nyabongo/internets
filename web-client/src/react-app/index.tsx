@@ -89,10 +89,15 @@ export interface View {
   showPage: (pageName: string, params?: ParamTypes) => void;
 }
 
+const getURLSheetId = () => {
+  const parsedUrl = new URL(window.location.href);
+  const sheetId = parsedUrl.searchParams.get('sheetId');
+  return sheetId || '1rvw0C2CB0cgEOjDxMDK_kcwDxzlu7Xt_yXX04Jg5pg4';
+};
 
 const App = ({ classes, width }: { classes: any; width: string }) => {
   const [page, setPage] = useState('');
-  const [sheetId] = useState('1rvw0C2CB0cgEOjDxMDK_kcwDxzlu7Xt_yXX04Jg5pg4');
+  const [sheetId] = useState(getURLSheetId());
   const [data, setData] = useState();
   const [providerId, setProviderId] = useState('');
   const [serviceId, setServiceId] = useState('');
