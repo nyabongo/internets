@@ -45,6 +45,7 @@ const PlanRow = ({ classes, plan, ...props }: { plan: Plan; classes: any; onClic
       role="row"
       className={classes.row}
       hover
+      component="div"
       data-testid="plan-link"
       {...props}
     >
@@ -70,8 +71,8 @@ const PlanRow = ({ classes, plan, ...props }: { plan: Plan; classes: any; onClic
 const Header = ({ classes, filter }: { classes: any; filter: Filter }) => {
   const { dispatch } = filter;
   return (
-    <TableHead>
-      <TableRow>
+    <TableHead component="div">
+      <TableRow component="div">
         <Cell className={`${classes.name} ${classes.cell}`}>
           <TableSortLabel
             role="columnheader"
