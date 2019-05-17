@@ -36,9 +36,20 @@ export class Filter {
 
   public filterPlans = (plans: Plan[]): Plan[] => plans
     .filter(plan => !this._provider || plan.providerId === this._provider)
+
+export const reducer = (filterState: Filter, action: any) => {
     .filter(plan => !this._service || plan.serviceId === this._service)
+  if ('provider' in action) {
+    filter.setProvider(action.provider);
+  } else filter.setProvider(filterState.provider);
+
+  if ('service' in action) {
+    filter.setService(action.service);
+  } else filter.setService(filterState.service);
 }
 
+  return filter;
+};
 
 const filterContext = createContext(new Filter());
 export const FilterProvider = filterContext.Provider;

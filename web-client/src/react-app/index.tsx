@@ -10,7 +10,7 @@ import Database from '../db/dyna-db';
 import { Data } from '../db/dyna-db/data';
 import LoadingIndicator from './components/loading-indicator';
 import PlansTable from './components/view-widgets/plans/table';
-import { Filter, FilterProvider } from '../db/filter';
+import { Filter, FilterProvider, reducer } from '../db/filter';
 
 const styles = createStyles((theme: Theme) => ({
   root: {
@@ -41,17 +41,6 @@ interface ParamTypes {
 export interface View {
   showPage: (pageName: string, params?: ParamTypes) => void;
 }
-const reducer = (filterState: Filter, action: any) => {
-  const filter = new Filter();
-  if ('provider' in action) {
-    filter.setProvider(action.provider);
-  } else filter.setProvider(filterState.provider);
-  if ('service' in action) {
-    filter.setService(action.service);
-  } else filter.setService(filterState.service);
-
-  return filter;
-};
 
 const App = ({ classes }: {classes: any}) => {
   const [page, setPage] = useState('');
