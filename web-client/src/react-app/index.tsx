@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import {
   createStyles, withStyles, Theme, Drawer, CssBaseline,
-  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText, withWidth,
+  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText, withWidth, Card,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -46,6 +46,8 @@ const styles = createStyles((theme: Theme) => ({
   },
   drawerPaper: {
     width: '320px',
+    display: 'flex',
+    flexDirection: 'column',
   },
   content: {
     paddingTop: '64px',
@@ -136,6 +138,7 @@ const App = ({ classes, width }: { classes: any; width: string }) => {
 
   filter.setDispatch(dispatch);
   const isTabletOrSmaller = ['xs', 'sm'].includes(width);
+  const dataSourceURL = `https://docs.google.com/spreadsheets/d/${sheetId}/edit`;
   return (
     <BrowserRouter>
       <FilterProvider value={filter}>
@@ -166,6 +169,17 @@ const App = ({ classes, width }: { classes: any; width: string }) => {
                     showPlans={showPlans}
                   />
                 )}
+                <div style={{ flexGrow: 1 }} />
+                <Card className={classes.sourceLink}>
+                  <ListItem
+                    button
+                    component="a"
+                    target="_blank"
+                    href={dataSourceURL}
+                  >
+                    <ListItemText primary="Data Source" />
+                  </ListItem>
+                </Card>
               </Drawer>
               <main className={`${classes.content} ${openDrawer ? classes.contentShift : classes.contentWithClosedNav}`}>
                 <AppBar className={classes.appBar}>
