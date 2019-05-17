@@ -1,4 +1,5 @@
 import Parser from './sheet-2-json';
+import processPlan from './format-plan';
 
 const clientId = '49810281275-knl4096cr6ljk4rg86o21brb1l9p5o12.apps.googleusercontent.com';
 const apiKey = 'AIzaSyAuH60EtBu0reVycvPqJ4Q-nsxApAN4J2g';
@@ -39,7 +40,7 @@ const initSheetsAPI = spreadsheetId => new Promise((resolve, reject) => {
         const data = {
           serviceProviders: providers.values.map(provider => providerParser.parse(provider)),
           services: services.values.map(service => serviceParser.parse(service)),
-          plans: plans.values.map((plan, index) => ({
+          plans: plans.values.map((plan, index) => processPlan({
             id: index.toString(),
             ...planParser.parse(plan),
           })),
