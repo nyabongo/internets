@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import {
   createStyles, withStyles, Theme, Drawer, CssBaseline,
-  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText, withWidth, Card,
+  AppBar, Toolbar, Typography, IconButton, ListItem, ListItemText, withWidth, Card, Dialog,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -16,6 +16,7 @@ import { Data } from '../db/dyna-db/data';
 import LoadingIndicator from './components/loading-indicator';
 import PlansTable from './components/view-widgets/plans/table';
 import { Filter, FilterProvider, reducer } from '../db/filter';
+import SourceLinks from './source-links';
 
 const styles = createStyles((theme: Theme) => ({
   root: {
@@ -108,6 +109,7 @@ const App = ({ classes, width }: { classes: any; width: string }) => {
   const [showPlans, setShowPlans] = useState(false);
   const [filter, dispatch] = useReducer(reducer, new Filter());
   const [openDrawer, setDrawer] = useState(true);
+  const [showSourceDialog, setShowSourceDialog] = useState(false);
 
   const view: View = {
     showPage: (pageName: string, params?: ParamTypes) => {
@@ -138,75 +140,81 @@ const App = ({ classes, width }: { classes: any; width: string }) => {
 
   filter.setDispatch(dispatch);
   const isTabletOrSmaller = ['xs', 'sm'].includes(width);
-  const dataSourceURL = `https://docs.google.com/spreadsheets/d/${sheetId}/edit`;
+  const sources = (
+    <ListItem button onClick={() => { setShowSourceDialog(true); }}>
+      <ListItemText primary="Data Source" />
+    </ListItem>
+  );
   return (
     <BrowserRouter>
       <FilterProvider value={filter}>
         <DBProvider value={data}>
           <PageRouter view={view} />
-          {data ? (
-            <div className={classes.root}>
-              <CssBaseline />
-              <Drawer
-                variant={isTabletOrSmaller ? 'temporary' : 'persistent'}
-                className={`${classes.nav} ${openDrawer ? `${classes.contentShift} ${classes.openNav}` : ''}`}
-                classes={{ paper: classes.drawerPaper }}
-                open={openDrawer}
-                onClose={() => { setDrawer(false); }}
-              >
-                <ListItem button divider onClick={() => { setDrawer(false); }}>
-                  <ListItemText primary=" " />
-                  <ChevronLeftIcon />
-                </ListItem>
-                {page === 'home' && <HomeNav />}
-                {page === 'providers' && <ServiceProviderList />}
-                {page === 'provider' && (
-                  <ProviderPage
-                    providerId={providerId}
-                    serviceId={serviceId}
-                    planId={planId}
-                    showServices={showServices}
-                    showPlans={showPlans}
-                  />
-                )}
-                <div style={{ flexGrow: 1 }} />
-                <Card className={classes.sourceLink}>
-                  <ListItem
-                    button
-                    component="a"
-                    target="_blank"
-                    href={dataSourceURL}
-                  >
-                    <ListItemText primary="Data Source" />
+          <>
+            <Dialog open={showSourceDialog} onClose={() => { setShowSourceDialog(false); }}>
+              <SourceLinks source={sheetId} />
+            </Dialog>
+            {data ? (
+              <div className={classes.root}>
+                <CssBaseline />
+                <Drawer
+                  variant={isTabletOrSmaller ? 'temporary' : 'persistent'}
+                  className={`${classes.nav} ${openDrawer ? `${classes.contentShift} ${classes.openNav}` : ''}`}
+                  classes={{ paper: classes.drawerPaper }}
+                  open={openDrawer}
+                  onClose={() => { setDrawer(false); }}
+                >
+                  <ListItem button divider onClick={() => { setDrawer(false); }}>
+                    <ListItemText primary=" " />
+                    <ChevronLeftIcon />
                   </ListItem>
-                </Card>
-              </Drawer>
-              <main className={`${classes.content} ${openDrawer ? classes.contentShift : classes.contentWithClosedNav}`}>
-                <AppBar className={classes.appBar}>
-                  <Toolbar>
-                    {!openDrawer && (
-                      <IconButton
-                        color="inherit"
-                        aria-label="Open drawer"
-                        onClick={() => { setDrawer(true); }}
-                      >
-                        <MenuIcon />
-                      </IconButton>
-                    )}
-                    <Typography variant="h6" color="inherit" noWrap>
+                  {page === 'home' && <HomeNav />}
+                  {page === 'providers' && <ServiceProviderList />}
+                  {page === 'provider' && (
+                    <ProviderPage
+                      providerId={providerId}
+                      serviceId={serviceId}
+                      planId={planId}
+                      showServices={showServices}
+                      showPlans={showPlans}
+                    />
+                  )}
+                  <div style={{ flexGrow: 1 }} />
+                  <Card className={classes.sourceLink}>
+                    {sources}
+                  </Card>
+                </Drawer>
+                <main className={`${classes.content} ${openDrawer ? classes.contentShift : classes.contentWithClosedNav}`}>
+                  <AppBar className={classes.appBar}>
+                    <Toolbar>
+                      {!openDrawer && (
+                        <IconButton
+                          color="inherit"
+                          aria-label="Open drawer"
+                          onClick={() => { setDrawer(true); }}
+                        >
+                          <MenuIcon />
+                        </IconButton>
+                      )}
+                      <Typography variant="h6" color="inherit" noWrap>
                       Internets
-                    </Typography>
-                  </Toolbar>
-                </AppBar>
-                {!planId && <PlansTable />}
-              </main>
-            </div>
-          ) : (
-            <div style={{ padding: '256px 0' }}>
-              <LoadingIndicator />
-            </div>
-          )
-          }
+                      </Typography>
+                    </Toolbar>
+                  </AppBar>
+                  {!planId && <PlansTable />}
+                </main>
+              </div>
+            ) : (
+              <>
+                <div style={{ padding: '256px 0' }}>
+                  <LoadingIndicator />
+                </div>
+                {sources}
+              </>
+            )
+            }
+
+          </>
         </DBProvider>
       </FilterProvider>
     </BrowserRouter>
