@@ -1,0 +1,90 @@
+{
+  "name": "ug-data",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "@types/node": "^11.13.8",
+    "@types/react": "^16.8.17",
+    "@types/react-dom": "^16.8.4",
+    "lodash": "^4.17.11",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --testMatch=**/*test.{ts,tsx} ",
+    "test:coverage": "react-scripts test --testMatch=**/*test.{ts,tsx} --coverage --no-cache --watchAll=false",
+    "lint": "eslint ./**/*.{ts,tsx} --cache ",
+    "lint:fix": "eslint ./**/*.{ts,tsx} --fix ",
+    "tslint": "tslint -c tslint.json ./**/*.{ts,tsx}",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
+    "@types/enzyme": "^3.9.2",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.13",
+    "@types/lodash": "^4.14.129",
+    "@types/react-router-dom": "^4.3.3",
+    "@types/storybook__addon-actions": "^3.4.2",
+    "@types/storybook__react": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-react": "^7.12.4",
+    "jest-enzyme": "^7.0.2",
+    "prettier": "^1.17.0",
+    "react-testing-library": "^7.0.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-react": "^4.0.0"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "collectCoverageFrom": [
+      "**/index.{js,jsx,ts,tsx}",
+      "!**/*stories.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/stories/**",
+      "!**/functions/**",
+      "!**/build/**",
+      "!**/e2etests/**",
+      "!**/coverage/**"
+    ]
+  }
+}

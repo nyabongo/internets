@@ -1,0 +1,43 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "lint",
+      "path": "web-client/",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "type": "npm",
+      "path": "web-client/",
+      "script": "test:coverage",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "lint:fix",
+      "path": "web-client/",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "type": "npm",
+      "script": "storybook",
+      "path": "web-client/",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "web-client/",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    }
+  ]
+}
